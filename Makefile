@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2023/02/25 12:08:16 by echavez-         ###   ########.fr        #
+#    Updated: 2023/02/25 13:11:12 by echavez-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,7 +31,7 @@ DIRFOO      :=  #$(DIRSRC)/foo/
 
 DIRS        :=  $(DIRSRC) $(DIRFOO)
 
-SRC         =   # main.c
+SRC         =   push_swap.c
 FOO         =
 
 SRCS        :=  $(SRC) $(FOO)
@@ -87,64 +87,66 @@ BLUE        =   "\e[34m"
 YELLOW      =   "\e[33m"
 E0M         =   "\e[0m"
 
+FMT         :=  $(REVER)$(YELLOW)$(BLINK)
+
 #******************************* DEPS COMPILATION ********************************#
 
 %.o             :   $(foreach dir,$(DIRS),../$(dir)/%.c)
-                    @printf $(GREEN)"Generating "$(NAME)" objects... %-33.33s\r"$(E0M) $@
-                    @$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
+	                @printf $(GREEN)"Generating "$(NAME)" objects... %-33.33s\r"$(E0M) $@
+	                @$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
 
 #******************************* MAIN COMPILATION ********************************#
 
 $(NAME)         :   ftlib $(OBJS)
-                    @$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_INC)
-                    @$(ECHO) $(REVER) $(YELLOW) $(BLINK)
-                    @$(ECHO) '                       ██████'
-                    @$(ECHO) '                   ████░░░░░░██'
-                    @$(ECHO) '                 ██░░░░░░░░██'
-                    @$(ECHO) '               ██░░░░░░░░░░░░██'
-                    @$(ECHO) '             ██░░░░░░░░░░░░░░░░██'
-                    @$(ECHO) '           ██░░░░░░░░░░░░░░░░░░██'
-                    @$(ECHO) '           ██░░░░░░░░░░░░░░░░░░░░██'
-                    @$(ECHO) '   ████████░░░░░░░░░░░░░░░░░░░░░░░░████████'
-                    @$(ECHO) ' ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'
-                    @$(ECHO) ' ██▓▓░░░░░░░░░░░░  ██░░░░  ██░░░░░░░░░░░░▓▓██'
-                    @$(ECHO) '   ██▓▓░░░░░░░░░░████░░░░████░░░░░░░░░░▓▓██'
-                    @$(ECHO) '     ██▓▓░░░░░░░░████░░░░████░░░░░░░░▓▓██'
-                    @$(ECHO) '       ██░░░░░░░░▓▓██░░░░██▓▓░░░░░░░░██'
-                    @$(ECHO) '       ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'
-                    @$(ECHO) '       ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'
-                    @$(ECHO) '       ██▓▓░░░░░░░░░░░░░░░░░░░░░░░░▓▓██'
-                    @$(ECHO) '       ██▓▓░░░░░░░░░░░░░░░░░░░░░░░░▓▓██'
-                    @$(ECHO) '         ██░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░██'
-                    @$(ECHO) '         ██▓▓░░▓▓████████████▓▓░░▓▓██'
-                    @$(ECHO) '           ██▓▓██            ██▓▓██'
-                    @$(ECHO) '             ██                ██'
-                    @$(ECHO) $(E0M)
+	                @$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_INC)
+	                @$(ECHO)
+	                @$(ECHO) '                       '$(FMT)'██████'$(E0M)
+	                @$(ECHO) '                   '$(FMT)'████░░░░░░██'$(E0M)
+	                @$(ECHO) '                 '$(FMT)'██░░░░░░░░██'$(E0M)
+	                @$(ECHO) '               '$(FMT)'██░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '             '$(FMT)'██░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '           '$(FMT)'██░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '           '$(FMT)'██░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '   '$(FMT)'████████░░░░░░░░░░░░░░░░░░░░░░░░████████'$(E0M)
+	                @$(ECHO) ' '$(FMT)'██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) ' '$(FMT)'██▓▓░░░░░░░░░░░░  ██░░░░  ██░░░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '   '$(FMT)'██▓▓░░░░░░░░░░████░░░░████░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '     '$(FMT)'██▓▓░░░░░░░░████░░░░████░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██░░░░░░░░▓▓██░░░░██▓▓░░░░░░░░██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██░░░░░░░░░░░░░░░░░░░░░░░░░░░░██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██▓▓░░░░░░░░░░░░░░░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '       '$(FMT)'██▓▓░░░░░░░░░░░░░░░░░░░░░░░░▓▓██'$(E0M)
+	                @$(ECHO) '         '$(FMT)'██░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░██'$(E0M)
+	                @$(ECHO) '         '$(FMT)'██▓▓░░▓▓████████████▓▓░░▓▓██'$(E0M)
+	                @$(ECHO) '           '$(FMT)'██▓▓██'$(E0M)'            '$(FMT)'██▓▓██'$(E0M)
+	                @$(ECHO) '             '$(FMT)'██'$(E0M)'                '$(FMT)'██'$(E0M)
+	                @$(ECHO) $(E0M)
 
-                    @$(ECHO) $(BOLD)$(GREEN)'> '$(NAME)' Compiled'$(E0M)
+	                @$(ECHO) $(BOLD)$(GREEN)'> '$(NAME)' Compiled'$(E0M)
 
 clean           :
-                    @($(RM) $(OBJS))
-                    @($(RM) $(DEPS))
-                    @($(RM) $(DIROBJ))
-                    @(cd $(LIB) && $(MAKE) clean)
-                    @$(ECHO) $(BOLD)$(RED)'> '$(NAME)' directory        cleaned'$(E0M)
+	                @($(RM) $(OBJS))
+	                @($(RM) $(DEPS))
+	                @($(RM) $(DIROBJ))
+	                @(cd $(LIB) && $(MAKE) clean)
+	                @$(ECHO) $(BOLD)$(RED)'> '$(NAME)' directory        cleaned'$(E0M)
 
 all             :  $(NAME)
 
 fclean          :  clean
-                    @$(RM) $(NAME)
-                    @(cd $(LIB) && $(MAKE) fclean)
-                    @$(ECHO) $(BOLD)$(RED)'> Executable             removed'$(E0M)
+	                @$(RM) $(NAME)
+	                @(cd $(LIB) && $(MAKE) fclean)
+	                @$(ECHO) $(BOLD)$(RED)'> Executable             removed'$(E0M)
 
 re              :  fclean all
 
 ftlib           :
-                    @(cd $(LIB) && $(MAKE))
+	                @(cd $(LIB) && $(MAKE))
 
 init            :
-                    @$(GIT) submodule init
-                    @$(GIT) submodule update
+	                @$(GIT) submodule init
+	                @$(GIT) submodule update
 
 .PHONY          :  all clean re fclean ftlib
 
