@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2023/02/25 13:11:12 by echavez-         ###   ########.fr        #
+#    Updated: 2023/02/25 17:48:20 by echavez-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,7 +31,7 @@ DIRFOO      :=  #$(DIRSRC)/foo/
 
 DIRS        :=  $(DIRSRC) $(DIRFOO)
 
-SRC         =   push_swap.c
+SRC         =   main.c
 FOO         =
 
 SRCS        :=  $(SRC) $(FOO)
