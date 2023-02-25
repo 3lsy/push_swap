@@ -5,6 +5,41 @@ This project is the first encounter with the concept of complexity. A sorting al
 The stacks contains a random amount of negative and positive numbers without any duplicates.
 
 The program displays the smallest list of instructions to sort the stack X, having the smallest number at the top.
+
+## Flow Chart
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%
+flowchart TD
+    Start(Start) --> input{Type of input}
+    input -- One string of args : Input 1 --> oneArgs[Convert into vector of arguments]
+    input -- Vector of args : Input 2 --> Analyzer
+    input -- No arguments : Input 3 --> ExitSuccess(EXIT_SUCCESS)
+    oneArgs --> Analyzer
+    subgraph Analyzer
+    Lexer[Lexer : Only numerical arguments] --> Parser[Parser : Negative sign position]
+    Parser --> Semantic[Semantic Analyzer : No duplicates, Int size limit]
+    end
+    Analyzer -- Error --> IsOne{Is Input 1}
+    IsOne -- Yes --> FreeVec[Free vector of arguments]
+    IsOne -- No --> Perror[Print Error]
+    FreeVec --> Perror
+    Perror --> ExitError(EXIT_FAILURE)
+    Analyzer -- Success --> Stacks
+
+    subgraph Stacks[Create stacks as double linked lists]
+    StackA[Create and load, to the bottom, Stack A] --> isOne{Is Input 1}
+    isOne -- Yes --> freeVec[Free vector of arguments]
+    freeVec --> StackB
+    isOne -- No --> StackB[Create Stack B]
+    end
+    Stacks --> ListInstruct[Create an Instructions linked list]
+    ListInstruct --> Sort{{Sorting algorithm : Loads Instructions list}}
+    Sort --> Reduce[Reduce Instructions list]
+    Reduce --> printInstruct[Print instructions]
+    printInstruct -->  ExitSuccess
+
+```
+
 ## Operations
 
 let X be the name of the stack (a and b):
