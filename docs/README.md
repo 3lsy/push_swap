@@ -1,129 +1,67 @@
-# Makefile
-```make
-#******************************************************************************#
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/05/20 17:00:07 by ciglesia          #+#    #+#              #
-#    Updated: 2023/02/25 11:32:50 by ciglesia         ###   ########.fr        #
-#                                                                              #
-#******************************************************************************#
+# push_swap
 
-NAME        =                               # Name of the binary
+This project is the first encounter with the concept of complexity. A sorting algorithm in the C language using stacks and with limited operations to interact with the stacks to sort the numbers.
 
-#****************** INC *******************#
-# General
-INC         =   ./include/                  # Project header files drectory
+The stacks contains a random amount of negative and positive numbers without any duplicates.
 
-# Libft
-LIB         =   ./libft/                    # Library to include
-LIB_H       =   ./libft/                    # Library header files directory
+The program displays the smallest list of instructions to sort the stack X, having the smallest number at the top.
+## Operations
 
-INCLUDE     =   -O3 -I $(LIB_H) -I $(INC)   # Header files
+let X be the name of the stack (a and b):
+ss, rr and rrr: are just two operations in one (sa && sb, ra && rb, ...)
+### Swap
+swap the first 2 elements at the top of stack X.
+- `sX`
+- `ss`
+### Push
+Pass top element from Y and put it on top of X.
+- `pX`
+### Rotate
+Shift up all elements of stack X by 1.
+- `rX`
+- `rr`
+### Reverse rotate
+Shift down all elements of stack X by 1.
+- `rrX`
+- `rrr`
 
-LIB_INC     =   -L$(LIB_H) -lft             # Include library
+## Build
+```bash
+make
+```
 
-#****************** SRC *******************#
+## Usage
+```bash
+# Multiple arguments
+./push_swap [num1] [num2] ... [numN]
+# One argument
+./push_swap "[num1] [num2] ... [numN]"
+```
+Which translates into:
+| stack X|
+|----|
+|num1|
+|num2|
+|...|
+|numN|
 
-DIRSRC      =   ./src/
-DIRFOO      :=  #$(DIRSRC)/foo/
-
-DIRS        :=  $(DIRSRC) $(DIRFOO)
-
-SRC         =   # main.c
-FOO         =
-
-SRCS        :=  $(SRC) $(FOO)
-
-#***************** DEPS ******************#
-
-DIROBJ      =   ./depo/
-
-#********************************* END OF CONFIG *********************************#
-
-OAUX        =   $(SRCS:%=$(DIROBJ)%)
-DEPS        =   $(OAUX:.c=.d)
-OBJS        =   $(OAUX:.c=.o)
-
-.ONESHELL:
-
-$(info Creating directory...)
-$(shell mkdir -p $(DIROBJ))
-
-ifdef FLAGS
-    ifeq ($(FLAGS), no)
-CFLAGS      =
-    endif
-    ifeq ($(FLAGS), debug)
-CFLAGS      =   -Wall -Wextra -Werror -ansi -pedantic -g
-    endif
-else
-CFLAGS      =   -Wall -Wextra -Werror
-endif
-
-ifdef VERB
-    ifeq ($(VERB), on)
-CFLAGS      +=  -DM_VERB
-    endif
-endif
-
-ifndef VERBOSE
-.SILENT:
-endif
-
-ENV         =   /usr/bin/env
-CC          =   $(ENV) clang
-RM          =   $(ENV) rm -rf
-ECHO        =   $(ENV) echo -e
-MKDIR       =   $(ENV) mkdir -p
-GIT         =   $(ENV) git
-BOLD        =   "\e[1m"
-BLINK       =   "\e[5m"
-RED         =   "\e[38;2;255;0;0m"
-GREEN       =   "\e[92m"
-BLUE        =   "\e[34m"
-YELLOW      =   "\e[33m"
-E0M         =   "\e[0m"
-
-#******************************* DEPS COMPILATION ********************************#
-
-%.o             :   $(foreach dir,$(DIRS),../$(dir)/%.c)
-                    @printf $(GREEN)"Generating "$(NAME)" objects... %-33.33s\r"$(E0M) $@
-                    @$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
-
-#******************************* MAIN COMPILATION ********************************#
-
-$(NAME)         :   ftlib $(OBJS)
-                    @$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB_INC)
-                    @$(ECHO) $(BOLD)$(GREEN)'> '$(NAME)' Compiled'$(E0M)
-
-clean           :
-                    @($(RM) $(OBJS))
-                    @($(RM) $(DEPS))
-                    @($(RM) $(DIROBJ))
-                    @(cd $(LIB) && $(MAKE) clean)
-                    @$(ECHO) $(BOLD)$(RED)'> '$(NAME)' directory        cleaned'$(E0M)
-
-all             :  $(NAME)
-
-fclean          :  clean
-                    @$(RM) $(NAME)
-                    @(cd $(LIB) && $(MAKE) fclean)
-                    @$(ECHO) $(BOLD)$(RED)'> Executable             removed'$(E0M)
-
-re              :  fclean all
-
-ftlib           :
-                    @(cd $(LIB) && $(MAKE))
-
-init            :
-                    @$(GIT) submodule init
-                    @$(GIT) submodule update
-
-.PHONY          :  all clean re fclean ftlib
-
--include $(DEPS)
+| stack Y|
+|----|
+| empty|
+| empty|
+| empty|
+| empty|
+## Example
+```bash
+./push_swap 2 1 3 6 5 8
+sa
+pb
+pb
+pb
+sa
+pa
+pa
+pa
+./push_swap one two 3
+Error
 ```
