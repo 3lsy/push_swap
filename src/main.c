@@ -6,17 +6,11 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/08 19:36:26 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/03/08 23:28:10 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_perror(char *e, int n)
-{
-	ft_putstr_fd(e, 2);
-	return (n);
-}
 
 void	ft_display_doubly(t_doubly *start)
 {
@@ -38,25 +32,40 @@ void	ft_display_doubly(t_doubly *start)
 
 int	main(int ac, char **av)
 {
-	t_byte		va_allocated;
-	char		**vargs;
-	t_doubly	*start;
-
 	if (ac < 2)
 		return (EXIT_SUCCESS);
-	vargs = &av[1];
-	va_allocated = (ac == 2);
+	ft_ps()->vargs = &av[1];
+	ft_ps()->va_allocated = (ac == 2);
 	if (ac == 2)
-		vargs = ft_split_args(av[1]);
-	if (!vargs || ft_analyzer(vargs) == EXIT_FAILURE)
-	{
-		if (va_allocated)
-			ft_free_split(&vargs);
+		ft_ps()->vargs = ft_split_args(av[1]);
+	if (!ft_ps()->vargs || ft_analyzer() == EXIT_FAILURE)
 		return (ft_perror("Error\n", EXIT_FAILURE));
-	}
-	start = ft_fill_stack(vargs);
-	if (!start)
+	ft_ps()->stack_a = ft_fill_stack();
+	if (!ft_ps()->stack_a)
 		return (ft_perror("Error\n", EXIT_FAILURE));
-	ft_display_doubly(start);
+	ft_display_doubly(ft_ps()->stack_a);
 	return (EXIT_SUCCESS);
+}
+
+t_ps	*ft_ps(void)
+{
+	static t_ps	x;
+
+	return (&x);
+}
+
+static __attribute__((constructor)) void	ps_constructor(void)
+{
+	ft_ps()->stack_a = NULL;
+	ft_ps()->stack_b = NULL;
+	ft_ps()->vargs = NULL;
+	ft_ps()->va_allocated = 0;
+}
+
+static __attribute__((destructor)) void	ps_destructor(void)
+{
+	ft_deldoubly(&ft_ps()->stack_a);
+	ft_deldoubly(&ft_ps()->stack_b);
+	if (ft_ps()->va_allocated)
+		ft_free_split(&ft_ps()->vargs);
 }

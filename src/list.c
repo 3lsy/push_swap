@@ -6,28 +6,30 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:08:42 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/08 19:28:10 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/03/08 23:30:27 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_doubly	*ft_fill_stack(char **argvs)
+t_doubly	*ft_fill_stack()
 {
 	int			i;
 	int			tmp;
 	t_doubly	*new;
 	t_doubly	*start;
+	char		**vargs;
 
+	vargs = ft_ps()->vargs;
 	start = NULL;
 	i = 0;
-	while (argvs[i])
+	while (vargs[i])
 	{
-		tmp = ft_atoi(argvs[i]);
-		new = ft_create_node(&tmp, sizeof(int));
+		tmp = ft_atoi(vargs[i]);
+		new = ft_new_doubly(&tmp, sizeof(int));
 		if (!new)
 			return (NULL);
-		ft_insert_last(new, &start);
+		ft_append_doubly(new, &start);
 		i++;
 	}
 	return (start);

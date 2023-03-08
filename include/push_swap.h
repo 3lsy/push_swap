@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/08 19:22:46 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/03/08 23:28:52 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,15 @@
 # include "libft.h"
 #include <stdio.h>//////////
 
-int			ft_analyzer(char **vargs);
-t_doubly	*ft_fill_stack(char **argvs);
+typedef struct s_ps {
+	t_doubly	*stack_a;
+	t_doubly	*stack_b;
+	char		**vargs;
+	t_bool		va_allocated;
+}	t_ps;
+
+int			ft_analyzer(void);
+t_doubly	*ft_fill_stack(void);
+t_ps		*ft_ps(void);
 
 #endif
