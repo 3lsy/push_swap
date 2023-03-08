@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2023/02/25 19:03:57 by echavez-         ###   ########.fr        #
+#    Updated: 2023/03/08 11:01:22 by echavez-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,7 +31,7 @@ DIRFOO      :=  #$(DIRSRC)/foo/
 
 DIRS        :=  $(DIRSRC) $(DIRFOO)
 
-SRC         =   main.c analyzer.c
+SRC         =   main.c analyzer.c list.c
 FOO         =
 
 SRCS        :=  $(SRC) $(FOO)
