@@ -10,33 +10,30 @@ The program displays the smallest list of instructions to sort the stack X, havi
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%
 flowchart TD
-    Start(Start) --> input{Type of input}
-    input -- One string of args : Input 1 --> oneArgs[Convert into vector of arguments]
-    input -- Vector of args : Input 2 --> Analyzer
-    input -- No arguments : Input 3 --> ExitSuccess(EXIT_SUCCESS)
+    Start((Constructor)) --> input{Type of input}
+    input -- One string of args --> oneArgs[Convert into vector of arguments]
+    input -- Vector of args --> Analyzer
+    input -- No arguments --> ExitSuccess(EXIT_SUCCESS)
     oneArgs --> Analyzer
     subgraph Analyzer
-    Lexer[Lexer : Only numerical arguments] --> Parser[Parser : Negative sign position]
-    Parser --> Semantic[Semantic Analyzer : No duplicates, Int size limit]
+    Lexer{{Lexer : Only numerical arguments}} --> Parser{{Parser : Negative sign position}}
+    Parser --> Semantic{{Semantic Analyzer : No duplicates, Int size limit}}
     end
-    Analyzer -- Error --> IsOne{Is Input 1}
-    IsOne -- Yes --> FreeVec[Free vector of arguments]
-    IsOne -- No --> Perror[Print Error]
-    FreeVec --> Perror
+    Analyzer -- Error --> Perror[Print Error]
     Perror --> ExitError(EXIT_FAILURE)
     Analyzer -- Success --> Stacks
 
     subgraph Stacks[Create stacks as double linked lists]
-    StackA[Create and load, to the bottom, Stack A] --> isOne{Is Input 1}
-    isOne -- Yes --> freeVec[Free vector of arguments]
-    freeVec --> StackB
-    isOne -- No --> StackB[Create Stack B]
+    StackA[(Create Stack A)] --> lsa[Load Stack A]
+    lsa --> StackB[(Create Stack B)]
+    StackB --> ListInstruct[(Create Stack Op)]
     end
-    Stacks --> ListInstruct[Create an Instructions linked list]
-    ListInstruct --> Sort{{Sorting algorithm : Loads Instructions list}}
+    Stacks --> Sort{{Sorting algorithm : Loads Instructions list}}
     Sort --> Reduce[Reduce Instructions list]
     Reduce --> printInstruct[Print instructions]
     printInstruct -->  ExitSuccess
+    ExitSuccess --> Destructor((Destructor))
+    ExitError --> Destructor
 
 ```
 
