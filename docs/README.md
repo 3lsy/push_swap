@@ -7,6 +7,7 @@ The stacks contains a random amount of negative and positive numbers without any
 The program displays the smallest list of instructions to sort the stack X, having the smallest number at the top.
 
 ## Flow Chart
+### Main flow
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%
 flowchart TD
@@ -36,7 +37,50 @@ flowchart TD
     ExitError --> Destructor
 
 ```
-
+### Sorting algorithm
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'monotoneY' } } }%%
+flowchart LR
+    subgraph Sorting[Sorting Algorithm]
+        direction LR
+        subgraph FirstStep[Stack A to B]
+                direction TB
+                subgraph Define
+                    direction LR
+                    sorted{{Sorted := Array with the numbers sorted}}
+                    middle[/Middle := Middle of SORTED array/]
+                    offset[/Offset := Size of partitions/]
+                    inset[/Inset := Limit from Middle - offset/]
+                    outset[/Outset := Limit from Middle + offset/]
+                end
+                Define --> a2b{Stack A is empty}
+                a2b -- No --> topInRange{"A's top number is\ninside [inset, offset]"}
+                topInRange -- Yes --> pb1[pb]
+                pb1 --> rmNumber["DEL num from Sorted Array"]
+                rmNumber --> inInset{"The number was\n[inset, middle]"}
+                inInset -- Yes --> rb1[rb]
+                topInRange -- No --> ra1[ra]
+                rb1 --> emptyInset{"[inset, middle] is empty"}
+                emptyInset -- Yes --> addInset[inset -= offset]
+                inInset -- No --> emptyOutset{"[middle, outset] is empty"}
+                emptyOutset -- Yes --> addOutset[outset += offset]
+                ra1 --> eol[End of loop]
+                emptyOutset -- No --> eol
+                emptyInset -- No --> eol
+                addOutset --> eol
+                addInset --> eol
+                eol --> a2b
+        end
+        subgraph SecondStep[Stack B to A]
+                direction LR
+                Middle[/Middle := Middle of sorted array/]
+                Offset[/Offset := Size of partitions/]
+                Inset[/Inset := Positive partition's limit from Middle/]
+                Outset[/Outset := Negative partition's limit from Middle/]
+        end
+        FirstStep --> SecondStep
+    end
+```
 ## Operations
 
 let X be the name of the stack (a and b):
