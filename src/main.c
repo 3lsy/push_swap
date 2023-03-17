@@ -6,13 +6,13 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/08 23:28:10 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:12:28 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_display_doubly(t_doubly *start)
+void	ft_display_doubly(t_doubly *start)/////
 {
 	t_doubly	*tmp;
 	if (!start)
@@ -59,6 +59,7 @@ static __attribute__((constructor)) void	ps_constructor(void)
 	ft_ps()->stack_a = NULL;
 	ft_ps()->stack_b = NULL;
 	ft_ps()->vargs = NULL;
+	ft_ps()->operations = NULL;
 	ft_ps()->va_allocated = 0;
 }
 
@@ -66,6 +67,7 @@ static __attribute__((destructor)) void	ps_destructor(void)
 {
 	ft_deldoubly(&ft_ps()->stack_a);
 	ft_deldoubly(&ft_ps()->stack_b);
+	ft_deldoubly(&ft_ps()->operations);
 	if (ft_ps()->va_allocated)
 		ft_free_split(&ft_ps()->vargs);
 }

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/08 23:28:52 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:11:58 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_ps {
 	t_doubly	*stack_a;
 	t_doubly	*stack_b;
+	t_doubly	*operations;
 	char		**vargs;
 	t_bool		va_allocated;
 }	t_ps;
