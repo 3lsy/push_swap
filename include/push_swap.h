@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/09 20:11:58 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/03/17 19:58:18 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_ps {
 
 int			ft_analyzer(void);
 t_doubly	*ft_fill_stack(void);
+void		ft_push_operation(char *operation);
 t_ps		*ft_ps(void);
 
 #endif

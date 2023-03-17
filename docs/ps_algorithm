@@ -1,0 +1,31 @@
+verify if loading stack a correctly
+
+n     : number of chunks          | x<=10 n5 x<=150 n8 x=else n18
+middle: middle of sorted array    | stack_size / 2
+offset: chunks size               | stack_size / n
+start : index in the sorted array | middle - offset
+end   : index in the sorted array | middle + offset
+
+Sorted array:
+n      = 8
+middle = 24 / 2     = 12
+offset = 24 / 8     = 3
+start  = 12 - 3     = 9
+end    = 12 + 3     = 15
+X X X X X X X X S | X X X X X X | E X X X X X X X X
+
+while stack A not empty:
+  if Stack A's top is between Start and End on Sorted Array
+    push to b
+    if the number was under the middle
+      rb
+    fi
+  else
+    ra
+  fi
+  if (upper halft sorted chung is empty):
+    start -= offset
+  if (lower halft sorted chung is empty):
+    end += offset
+
+//b -> a
