@@ -72,11 +72,28 @@ flowchart LR
                 eol --> a2b
         end
         subgraph SecondStep[Stack B to A]
-                direction LR
-                Middle[/Middle := Middle of sorted array/]
-                Offset[/Offset := Size of partitions/]
-                Inset[/Inset := Positive partition's limit from Middle/]
-                Outset[/Outset := Negative partition's limit from Middle/]
+                direction TB
+                subgraph Define2[Define]
+                    direction LR
+                    tail[/A.tail := Active partition in tail of A/]
+                    btail[/B.tail := Active partition in tail of B/]
+                    bhead[/B.head := Active partition in head of B/]
+                end
+                Define2 --> b2a{Stack B and A.tail are empty\n}
+                b2a --No--> search{"Search for max(B.head + B.tail + A.tail) number"}
+                search --"First element of B"--> pa{{pa}}
+                search --"Last element of A"--> rra{{rra}}
+                search --"A.tail is empty\nor\nFirst element of B > Last element of A"-->para{{"pa\nra"}}
+                search --"else"--> else{Where is the\nmax number}
+                else --"B.head"--> rb{{rb}}
+                else --"B.tail"--> rrb{{rrb}}
+                rb --> eol2[End of loop]
+                rrb --> eol2
+                pa --> eol2
+                rra --> eol2
+                para --> eol2
+                eol2 --> b2a
+
         end
         FirstStep --> SecondStep
     end
