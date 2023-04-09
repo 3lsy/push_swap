@@ -12,37 +12,41 @@
 
 #include "push_swap.h"
 
-t_doubly	*ft_fill_stack()
+/*
+** Fill stack A and sorted array
+*/
+
+void	ft_fill_stack()
 {
 	int			i;
 	int			tmp;
 	t_doubly	*new;
-	t_doubly	*start;
 	char		**vargs;
 
 	vargs = ft_ps()->vargs;
-	start = NULL;
 	i = 0;
 	while (vargs[i])
 	{
 		tmp = ft_atoi(vargs[i]);
-		new = ft_new_doubly(&tmp, sizeof(int));
+		ft_ps()->sorted[i] = tmp;
+		new = ft_new_doubly((void *)&tmp, sizeof(int));
 		if (!new)
-			return (NULL);
-		ft_append_doubly(new, &start);
+			exit_error();
+		ft_append_doubly(new, &(ft_ps()->stack_a));
 		i++;
 	}
-	return (start);
 }
+
+/*
+** Do not send mallocated char *operation
+*/
 
 void	ft_push_operation(char *operation)
 {
 	t_doubly	*new;
-	t_doubly	*operations;
 
-	operations = ft_ps()->operations;
-	new = ft_new_doubly(&operation, sizeof(char *));
+	new = ft_new_doubly(operation, sizeof(char) * (ft_strlen(operation) + 1));
 	if (!new)
-		return (NULL);
-	ft_append_doubly(new, &operations);
+		return ;
+	ft_append_doubly(new, &(ft_ps()->stack_op));
 }

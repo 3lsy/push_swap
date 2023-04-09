@@ -14,6 +14,7 @@ start  = 12 - 3     = 9
 end    = 12 + 3     = 15
 X X X X X X X X S | X X X X X X | E X X X X X X X X
 
+//a -> b
 while stack A not empty:
   if Stack A's top is between Start and End on Sorted Array
     push to b

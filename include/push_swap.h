@@ -19,16 +19,19 @@
 #include <stdio.h>//////////
 
 typedef struct s_ps {
+	int			*sorted;
+	int			n_numbers;
 	t_doubly	*stack_a;
 	t_doubly	*stack_b;
-	t_doubly	*operations;
+	t_doubly	*stack_op;
 	char		**vargs;
 	t_bool		va_allocated;
 }	t_ps;
 
-int			ft_analyzer(void);
-t_doubly	*ft_fill_stack(void);
+void		ft_analyzer(void);
+void		ft_fill_stack(void);
 void		ft_push_operation(char *operation);
 t_ps		*ft_ps(void);
+void		exit_error(void);
 
 #endif

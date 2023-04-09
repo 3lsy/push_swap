@@ -38,13 +38,22 @@ int	main(int ac, char **av)
 	ft_ps()->va_allocated = (ac == 2);
 	if (ac == 2)
 		ft_ps()->vargs = ft_split_args(av[1]);
-	if (!ft_ps()->vargs || ft_analyzer() == EXIT_FAILURE)
+	if (!ft_ps()->vargs)
 		return (ft_perror("Error\n", EXIT_FAILURE));
-	ft_ps()->stack_a = ft_fill_stack();
-	if (!ft_ps()->stack_a)
+	ft_analyzer();
+	ft_ps()->sorted = malloc(sizeof(int) * ft_ps()->n_numbers);
+	if (!ft_ps()->sorted)
 		return (ft_perror("Error\n", EXIT_FAILURE));
-	ft_display_doubly(ft_ps()->stack_a);
+	ft_fill_stack();
+	ft_display_doubly(ft_ps()->stack_a);//////////////////////
+//	if (ft_sort() == EXIT_FAILURE)
+//		return (ft_perror("Error\n", EXIT_FAILURE));
 	return (EXIT_SUCCESS);
+}
+
+void	exit_error(void)
+{
+	exit(ft_perror("Error\n", EXIT_FAILURE));
 }
 
 t_ps	*ft_ps(void)
@@ -56,18 +65,21 @@ t_ps	*ft_ps(void)
 
 static __attribute__((constructor)) void	ps_constructor(void)
 {
+	ft_ps()->sorted = NULL;
+	ft_ps()->vargs = NULL;
 	ft_ps()->stack_a = NULL;
 	ft_ps()->stack_b = NULL;
-	ft_ps()->vargs = NULL;
-	ft_ps()->operations = NULL;
+	ft_ps()->stack_op = NULL;
 	ft_ps()->va_allocated = 0;
+	ft_ps()->n_numbers = 0;
 }
 
 static __attribute__((destructor)) void	ps_destructor(void)
 {
+	free(ft_ps()->sorted);
 	ft_deldoubly(&ft_ps()->stack_a);
 	ft_deldoubly(&ft_ps()->stack_b);
-	ft_deldoubly(&ft_ps()->operations);
+	ft_deldoubly(&ft_ps()->stack_op);
 	if (ft_ps()->va_allocated)
 		ft_free_split(&ft_ps()->vargs);
 }

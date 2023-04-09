@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	ft_lexer_parser(char *arg)
+static void	ft_lexer_parser(char *arg)
 {
 	int	i;
 
@@ -22,39 +22,35 @@ static int	ft_lexer_parser(char *arg)
 	while (arg[i])
 	{
 		if (!ft_isdigit(arg[i]))
-			return (EXIT_FAILURE);
+			exit_error();
 		i++;
 	}
-	return (EXIT_SUCCESS);
 }
 
-static int	ft_semantic(char **vargs, char *arg, int i)
+static void	ft_semantic(char **vargs, char *arg, int i)
 {
 	i++;
 	while (vargs[i])
 	{
 		if (!ft_strcmp(vargs[i++], arg))
-			return (EXIT_FAILURE);
+			exit_error();
 	}
 	if (!ft_isint(arg))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		exit_error();
 }
 
-int	ft_analyzer(void)
+void	ft_analyzer(void)
 {
-	int	i;
+	int		i;
 	char	**vargs;
 
 	vargs = ft_ps()->vargs;
 	i = 0;
 	while (vargs[i])
 	{
-		if (ft_lexer_parser(vargs[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		if (ft_semantic(vargs, vargs[i], i) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+		ft_lexer_parser(vargs[i]);
+		ft_semantic(vargs, vargs[i], i);
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	ft_ps()->n_numbers = i;
 }
