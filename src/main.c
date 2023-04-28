@@ -12,24 +12,6 @@
 
 #include "push_swap.h"
 
-void	ft_display_doubly(t_doubly *start)/////
-{
-	t_doubly	*tmp;
-	if (!start)
-	{
-		ft_putstr_fd("Empty list", 2);
-		return ;
-	}
-	tmp = start;
-	printf("%d\n", *(int *)(start->obj));
-	start = start->next;
-	while (start != tmp)
-	{
-		printf("%d\n", *(int *)(start->obj));
-		start = start->next;
-	}
-}
-
 int	main(int ac, char **av)
 {
 	if (ac < 2)
@@ -45,9 +27,8 @@ int	main(int ac, char **av)
 	if (!ft_ps()->sorted)
 		return (ft_perror("Error\n", EXIT_FAILURE));
 	ft_fill_stack();
-	ft_display_doubly(ft_ps()->stack_a);//////////////////////
-//	if (ft_sort() == EXIT_FAILURE)
-//		return (ft_perror("Error\n", EXIT_FAILURE));
+	ft_display_doubly(ft_ps()->a.stack);//////////////////////
+	ft_sort();
 	return (EXIT_SUCCESS);
 }
 
@@ -65,21 +46,30 @@ t_ps	*ft_ps(void)
 
 static __attribute__((constructor)) void	ps_constructor(void)
 {
+	ft_ps()->a.head = 0;
+	ft_ps()->a.tail = 0;
+	ft_ps()->a.stack = NULL;
+	ft_ps()->b.head = 0;
+	ft_ps()->b.tail = 0;
+	ft_ps()->b.stack = NULL;
+	ft_ps()->op_stack = NULL;
 	ft_ps()->sorted = NULL;
 	ft_ps()->vargs = NULL;
-	ft_ps()->stack_a = NULL;
-	ft_ps()->stack_b = NULL;
-	ft_ps()->stack_op = NULL;
 	ft_ps()->va_allocated = 0;
 	ft_ps()->n_numbers = 0;
+	ft_ps()->info.n_partitions = 0;
+	ft_ps()->info.sorted_middle = 0;
+	ft_ps()->info.offset = 0;
+	ft_ps()->info.inset = 0;
+	ft_ps()->info.outset = 0;
 }
 
 static __attribute__((destructor)) void	ps_destructor(void)
 {
 	free(ft_ps()->sorted);
-	ft_deldoubly(&ft_ps()->stack_a);
-	ft_deldoubly(&ft_ps()->stack_b);
-	ft_deldoubly(&ft_ps()->stack_op);
+	ft_deldoubly(&ft_ps()->a.stack);
+	ft_deldoubly(&ft_ps()->b.stack);
+	ft_deldoubly(&ft_ps()->op_stack);
 	if (ft_ps()->va_allocated)
 		ft_free_split(&ft_ps()->vargs);
 }

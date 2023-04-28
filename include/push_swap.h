@@ -13,21 +13,39 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include "TEMPORARY_INCLUDE.h"//////////
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-#include <stdio.h>//////////
+
+typedef struct s_stack {
+	t_doubly	*stack;
+	int			head;
+	int			tail;
+}	t_stack;
+
+typedef struct s_info {
+	int			n_partitions;
+	int			sorted_middle;
+	int			offset;
+	int			inset;
+	int			outset;
+}	t_info;
 
 typedef struct s_ps {
 	int			*sorted;
 	int			n_numbers;
-	t_doubly	*stack_a;
-	t_doubly	*stack_b;
-	t_doubly	*stack_op;
+	t_info		info;
+
+	t_stack		a;
+	t_stack		b;
+	t_doubly	*op_stack;
+
 	char		**vargs;
 	t_bool		va_allocated;
 }	t_ps;
 
+void		ft_sort(void);
 void		ft_analyzer(void);
 void		ft_fill_stack(void);
 void		ft_push_operation(char *operation);

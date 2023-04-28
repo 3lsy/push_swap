@@ -32,7 +32,7 @@ void	ft_fill_stack()
 		new = ft_new_doubly((void *)&tmp, sizeof(int));
 		if (!new)
 			exit_error();
-		ft_append_doubly(new, &(ft_ps()->stack_a));
+		ft_append_doubly(new, &(ft_ps()->a.stack));
 		i++;
 	}
 }
@@ -48,5 +48,5 @@ void	ft_push_operation(char *operation)
 	new = ft_new_doubly(operation, sizeof(char) * (ft_strlen(operation) + 1));
 	if (!new)
 		return ;
-	ft_append_doubly(new, &(ft_ps()->stack_op));
+	ft_append_doubly(new, &(ft_ps()->op_stack));
 }
