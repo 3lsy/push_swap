@@ -31,7 +31,7 @@ DIRFOO      :=  #$(DIRSRC)/foo/
 
 DIRS        :=  $(DIRSRC) $(DIRFOO)
 
-SRC         =   main.c analyzer.c list.c sort.c TEMPORARY_FUNCTIONS.c
+SRC         =   main.c analyzer.c list.c sort.c decisions.c TEMPORARY_FUNCTIONS.c
 FOO         =
 
 SRCS        :=  $(SRC) $(FOO)

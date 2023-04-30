@@ -51,5 +51,6 @@ void		ft_fill_stack(void);
 void		ft_push_operation(char *operation);
 t_ps		*ft_ps(void);
 void		exit_error(void);
+t_bool		inset_outset(int nb);
 
 #endif
