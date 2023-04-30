@@ -54,7 +54,7 @@ flowchart LR
                     outset[/Outset := Limit from Middle + offset/]
                 end
                 Define --> a2b{Stack A is empty}
-                a2b -- No --> topInRange{"A's top number is\ninside [inset, offset]"}
+                a2b -- No --> topInRange{"A's top number is\ninside [inset, outset]"}
                 topInRange -- Yes --> pb1[pb]
                 pb1 --> rmNumber["DEL num from Sorted Array"]
                 rmNumber --> inInset{"The number was\n[inset, middle]"}
