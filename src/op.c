@@ -68,6 +68,8 @@ void	push(char s)
 	next = (*stack_out)->next;
 	prev = (*stack_out)->prev;
 	ft_push_doubly(*stack_out, stack_in);
+	//stack_out.size--;// < 0 -> 0
+	//stack_in.size++;// > max -> max
 	if (next == *stack_out || prev == *stack_out)
 	{
 		*stack_out = NULL;
