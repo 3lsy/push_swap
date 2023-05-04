@@ -22,6 +22,7 @@ typedef struct s_stack {
 	t_doubly	*stack;
 	int			head;
 	int			tail;
+	int			size;
 }	t_stack;
 
 typedef struct s_info {
@@ -51,7 +52,7 @@ void		ft_fill_stack(void);
 void		ft_push_operation(char *operation);
 t_ps		*ft_ps(void);
 void		exit_error(void);
-t_bool		is_between(int first, int last, int nb);
+int			is_between(int first, int last, int nb);
 t_bool		is_empty(int first, int last);
 void		tweak_offset(char io);
 

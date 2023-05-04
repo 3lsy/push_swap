@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_bool	is_between(int first, int last, int nb)
+int	is_between(int first, int last, int nb)
 {
 	int	i;
 	int	size;

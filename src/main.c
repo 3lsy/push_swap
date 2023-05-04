@@ -48,9 +48,11 @@ static __attribute__((constructor)) void	ps_constructor(void)
 {
 	ft_ps()->a.head = 0;
 	ft_ps()->a.tail = 0;
+	ft_ps()->a.size = size;
 	ft_ps()->a.stack = NULL;
 	ft_ps()->b.head = 0;
 	ft_ps()->b.tail = 0;
+	ft_ps()->b.size = 0;
 	ft_ps()->b.stack = NULL;
 	ft_ps()->op_stack = NULL;
 	ft_ps()->sorted = NULL;

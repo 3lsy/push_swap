@@ -53,4 +53,5 @@ void	ft_analyzer(void)
 		i++;
 	}
 	ft_ps()->n_numbers = i;
+	ft_ps()->a.size = i;
 }

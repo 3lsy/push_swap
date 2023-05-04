@@ -27,6 +27,8 @@ static void	init_info()
 		n_partitions = 8;
 	middle = size / 2;
 	offset = size / n_partitions;
+	if (offset == 0)
+		offset = 1;
 	ft_ps()->info.n_partitions = n_partitions;
 	ft_ps()->info.middle = middle;
 	ft_ps()->info.offset = offset;
@@ -53,20 +55,30 @@ void	a2b()
 	{
 		top = *(int *)ft_ps()->a.stack->obj;
 		pos = is_between(ft_ps()->info.inset, ft_ps()->info.outset, top);
+		printf("{%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, pos, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
 		if (pos >= 0)
 		{
 			push('B');
+			printf("push b\n");
 			ft_ps()->sorted[pos].exists = 0;
-			if (is_between(ft_ps()->info.inset, ft_ps()->info.middle, top) >= 0)
+			pos = is_between(ft_ps()->info.inset, ft_ps()->info.middle, top);
+			if (pos >= 0 && pos != ft_ps()->info.middle)
 			{
 				rotate('B');
+				printf("rotate b\n");
 				tweak_offset('i');
 			}
 			else
 				tweak_offset('o');
+			if (pos == ft_ps()->info.middle)
+				tweak_offset('i');
 		}
 		else
+		{
 			rotate('A');
+			printf("rotate a\n");
+		}
+		ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
 	}
 }
 

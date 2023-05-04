@@ -29,4 +29,9 @@ void	ft_display_array(t_int *tab, int size)
 	while (i < size)
 		printf("%d ", tab[i++].x);
 	printf("]\n");
+	i = 0;
+	printf("E     : [ ");
+	while (i < size)
+		printf("%d ", tab[i++].exists);
+	printf("]\n");
 }
