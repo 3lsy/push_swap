@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	if (!ft_ps()->vargs)
 		return (ft_perror("Error\n", EXIT_FAILURE));
 	ft_analyzer();
-	ft_ps()->sorted = malloc(sizeof(int) * ft_ps()->n_numbers);
+	ft_ps()->sorted = malloc(sizeof(t_int) * ft_ps()->n_numbers);
 	if (!ft_ps()->sorted)
 		return (ft_perror("Error\n", EXIT_FAILURE));
 	ft_fill_stack();
@@ -58,7 +58,7 @@ static __attribute__((constructor)) void	ps_constructor(void)
 	ft_ps()->va_allocated = 0;
 	ft_ps()->n_numbers = 0;
 	ft_ps()->info.n_partitions = 0;
-	ft_ps()->info.sorted_middle = 0;
+	ft_ps()->info.middle = 0;
 	ft_ps()->info.offset = 0;
 	ft_ps()->info.inset = 0;
 	ft_ps()->info.outset = 0;

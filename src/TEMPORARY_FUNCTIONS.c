@@ -20,13 +20,13 @@ void	ft_display_doubly(t_doubly *start)
 	printf("]\n");
 }
 
-void	ft_display_array(int *tab, int size)
+void	ft_display_array(t_int *tab, int size)
 {
 	int i;
 
 	i = 0;
 	printf("Sorted: [ ");
 	while (i < size)
-		printf("%d ", tab[i++]);
+		printf("%d ", tab[i++].x);
 	printf("]\n");
 }

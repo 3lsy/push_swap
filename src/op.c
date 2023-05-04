@@ -35,19 +35,28 @@
 */
 void	push(char s)
 {
-	t_doubly	**a;
-	t_doubly	**b;
+	t_doubly	**stack_in;
+	t_doubly	**stack_out;
+	t_doubly	*next;
+	t_doubly	*prev;
 
 	stack_in = &ft_ps()->a.stack;
 	stack_out = &ft_ps()->a.stack;
 	if (s == 'A')
 		stack_out = &ft_ps()->b.stack;
-	elif (s == 'B')
+	else if (s == 'B')
 		stack_in = &ft_ps()->b.stack;
-
+	next = (*stack_out)->next;
+	prev = (*stack_out)->prev;
 	ft_push_doubly(*stack_out, stack_in);
-	ft_detach_doubly(stack_out);
-	// verify if ft_ps()->*.stack was modified
+	if (next == *stack_out || prev == *stack_out)
+	{
+		*stack_out = NULL;
+		return ;
+	}
+	prev->next = next;
+	next->prev = prev;
+	*stack_out = next;
 }
 
 /*
@@ -56,16 +65,21 @@ void	push(char s)
 ** 'B' == rb
 ** 'X' == rr
 */
-/*void	rotate(char s)
+
+void	rotate(char s)
 {
-	if (s == 'A')
-		pass;
-	elif (s == 'B')
-		pass;
-	elif (s == 'X')
-		pass;
+	t_doubly	**stack;
+
+	stack = &ft_ps()->a.stack;
+	if (s == 'B')
+		stack = &ft_ps()->b.stack;
+	else if (s == 'X')
+		rotate('B');
+	if (*stack == NULL)
+		return ;
+	*stack = (*stack)->next;
 }
-*/
+
 /*
 ** Param 1 (char) 'A' | 'B' | 'X':
 ** 'A' == rra

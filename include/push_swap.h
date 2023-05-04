@@ -26,14 +26,14 @@ typedef struct s_stack {
 
 typedef struct s_info {
 	int			n_partitions;
-	int			sorted_middle;
+	int			middle;
 	int			offset;
 	int			inset;
 	int			outset;
 }	t_info;
 
 typedef struct s_ps {
-	int			*sorted;
+	t_int		*sorted;
 	int			n_numbers;
 	t_info		info;
 
@@ -51,6 +51,15 @@ void		ft_fill_stack(void);
 void		ft_push_operation(char *operation);
 t_ps		*ft_ps(void);
 void		exit_error(void);
-t_bool		inset_outset(int nb);
+t_bool		is_between(int first, int last, int nb);
+t_bool		is_empty(int first, int last);
+void		tweak_offset(char io);
+
+/*
+** operations
+*/
+
+void		push(char s);
+void		rotate(char s);
 
 #endif

@@ -28,7 +28,8 @@ void	ft_fill_stack()
 	while (vargs[i])
 	{
 		tmp = ft_atoi(vargs[i]);
-		ft_ps()->sorted[i] = tmp;
+		ft_ps()->sorted[i].x = tmp;
+		ft_ps()->sorted[i].exists = 1;
 		new = ft_new_doubly((void *)&tmp, sizeof(int));
 		if (!new)
 			exit_error();

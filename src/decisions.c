@@ -12,20 +12,56 @@
 
 #include "push_swap.h"
 
-t_bool inset_outset(int nb)
+t_bool	is_between(int first, int last, int nb)
 {
 	int	i;
 	int	size;
-	int	outset;
 
+	i = first;
 	size = ft_ps()->n_numbers;
-	outset = ft_ps()->info.outset;
-	i = ft_ps()->info.inset;
-	while (i < size && i <= outset)
+	while (i < size && i <= last)
 	{
-		if (nb == ft_ps()->sorted[i])
-			return (1);
+		if (nb == ft_ps()->sorted[i].x)
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
+}
+
+t_bool	is_empty(int first, int last)
+{
+	int	i;
+	int	size;
+
+	i = first;
+	size = ft_ps()->n_numbers;
+	while (i < size && i <= last)
+	{
+		if (ft_ps()->sorted[i].exists)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	tweak_offset(char io)
+{
+	if (io == 'i')
+	{
+		if (is_empty(ft_ps()->info.inset, ft_ps()->info.middle))
+		{
+			ft_ps()->info.inset -= ft_ps()->info.offset;
+			if (ft_ps()->info.inset < 0)
+				ft_ps()->info.inset = 0;
+		}
+	}
+	else if (io == 'o')
+	{
+		if (is_empty(ft_ps()->info.middle, ft_ps()->info.outset))
+		{
+			ft_ps()->info.outset += ft_ps()->info.offset;
+			if (ft_ps()->info.outset >= ft_ps()->n_numbers)
+				ft_ps()->info.outset = ft_ps()->n_numbers - 1;
+		}
+	}
 }
