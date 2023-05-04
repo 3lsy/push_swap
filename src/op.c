@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/09 20:12:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:07:10 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,40 @@
 ** 'B' == sb
 ** 'X' == ss
 */
-/*void	swap(char s)
+
+void	swap(char s)
 {
-	if (s == 'A')
-		pass;
-	elif (s == 'B')
-		pass;
-	elif (s == 'X')
-		pass;
+	t_doubly	**stack;
+	t_doubly	*start;
+	t_doubly	*second;
+	t_doubly	*tmp;
+
+	stack = &ft_ps()->a.stack;
+	if (s == 'B')
+		stack = &ft_ps()->b.stack;
+	else if (s == 'X')
+		swap('B');
+	if (*stack == NULL || *stack == (*stack)->next)
+		return ;
+	start = *stack;
+	second = start->next;
+	tmp = start->next;
+	start->next = second->next;
+	second->next = tmp;
+	tmp = start->prev;
+	start->prev = second->prev;
+	second->prev = tmp;
+	second->prev->next = second;
+	start->next->prev = start;
+	*stack = second;
 }
-*/
+
 /*
 ** Param 1 (char) 'A' | 'B':
 ** 'A' == pa
 ** 'B' == pb
 */
+
 void	push(char s)
 {
 	t_doubly	**stack_in;
@@ -86,13 +105,17 @@ void	rotate(char s)
 ** 'B' == rrb
 ** 'X' == rrr
 */
-/*void	rrotate(char s)
+
+void	rrotate(char s)
 {
-	if (s == 'A')
-		pass;
-	elif (s == 'B')
-		pass;
-	elif (s == 'X')
-		pass;
+	t_doubly	**stack;
+
+	stack = &ft_ps()->a.stack;
+	if (s == 'B')
+		stack = &ft_ps()->b.stack;
+	else if (s == 'X')
+		rrotate('B');
+	if (*stack == NULL)
+		return ;
+	*stack = (*stack)->prev;
 }
-*/
