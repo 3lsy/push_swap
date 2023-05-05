@@ -12,6 +12,18 @@
 
 #include "push_swap.h"
 
+static t_doubly	**choose_stack(char s, void (*op)(char))
+{
+	t_doubly	**stack;
+
+	stack = &ft_ps()->a.stack;
+	if (s == 'B')
+		stack = &ft_ps()->b.stack;
+	else if (op != NULL && s == 'X')
+		op('B');
+	return (stack);
+}
+
 /*
 ** Param 1 (char) 'A' | 'B' | 'X':
 ** 'A' == sa
@@ -26,11 +38,7 @@ void	swap(char s)
 	t_doubly	*second;
 	t_doubly	*tmp;
 
-	stack = &ft_ps()->a.stack;
-	if (s == 'B')
-		stack = &ft_ps()->b.stack;
-	else if (s == 'X')
-		swap('B');
+	stack = choose_stack(s, swap);
 	if (*stack == NULL || *stack == (*stack)->next)
 		return ;
 	start = *stack;
@@ -44,6 +52,7 @@ void	swap(char s)
 	second->prev->next = second;
 	start->next->prev = start;
 	*stack = second;
+	printf("swap %c\n", s);///////////////////
 }
 
 /*
@@ -59,17 +68,13 @@ void	push(char s)
 	t_doubly	*next;
 	t_doubly	*prev;
 
-	stack_in = &ft_ps()->a.stack;
+	stack_in = choose_stack(s, NULL);
 	stack_out = &ft_ps()->a.stack;
 	if (s == 'A')
 		stack_out = &ft_ps()->b.stack;
-	else if (s == 'B')
-		stack_in = &ft_ps()->b.stack;
 	next = (*stack_out)->next;
 	prev = (*stack_out)->prev;
 	ft_push_doubly(*stack_out, stack_in);
-	//stack_out.size--;// < 0 -> 0
-	//stack_in.size++;// > max -> max
 	if (next == *stack_out || prev == *stack_out)
 	{
 		*stack_out = NULL;
@@ -78,6 +83,7 @@ void	push(char s)
 	prev->next = next;
 	next->prev = prev;
 	*stack_out = next;
+	printf("push %c\n", s);////////////
 }
 
 /*
@@ -91,14 +97,11 @@ void	rotate(char s)
 {
 	t_doubly	**stack;
 
-	stack = &ft_ps()->a.stack;
-	if (s == 'B')
-		stack = &ft_ps()->b.stack;
-	else if (s == 'X')
-		rotate('B');
+	stack = choose_stack(s, rotate);
 	if (*stack == NULL)
 		return ;
 	*stack = (*stack)->next;
+	printf("rotate %c\n", s);///////////
 }
 
 /*
@@ -112,12 +115,9 @@ void	rrotate(char s)
 {
 	t_doubly	**stack;
 
-	stack = &ft_ps()->a.stack;
-	if (s == 'B')
-		stack = &ft_ps()->b.stack;
-	else if (s == 'X')
-		rrotate('B');
+	stack = choose_stack(s, rrotate);
 	if (*stack == NULL)
 		return ;
 	*stack = (*stack)->prev;
+	printf("rrotate %c\n", s);//////////
 }

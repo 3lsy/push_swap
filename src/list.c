@@ -16,7 +16,7 @@
 ** Fill stack A and sorted array
 */
 
-void	ft_fill_stack()
+void	ft_fill_stack(void)
 {
 	int			i;
 	int			tmp;

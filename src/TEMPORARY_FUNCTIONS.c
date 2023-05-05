@@ -10,7 +10,7 @@ void	ft_display_doubly(t_doubly *start)
 		return ;
 	}
 	tmp = start;
-	printf("Doubly: [ %d ", *(int *)(start->obj));
+	printf("  Doubly: [ %d ", *(int *)(start->obj));
 	start = start->next;
 	while (start != tmp)
 	{
@@ -25,12 +25,12 @@ void	ft_display_array(t_int *tab, int size)
 	int i;
 
 	i = 0;
-	printf("Sorted: [ ");
+	printf("  Sorted: [ ");
 	while (i < size)
 		printf("%d ", tab[i++].x);
 	printf("]\n");
 	i = 0;
-	printf("E     : [ ");
+	printf("  E     : [ ");
 	while (i < size)
 		printf("%d ", tab[i++].exists);
 	printf("]\n");

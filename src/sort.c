@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	init_info()
+static void	init_info(void)
 {
 	int	size;
 	int	n_partitions;
@@ -38,56 +38,58 @@ static void	init_info()
 	ft_ps()->info.outset = middle + offset;
 
 
-	printf("size: %d\n", ft_ps()->n_numbers);
+	printf("===============================\n");
+	printf("size:         %d\n", ft_ps()->n_numbers);
 	printf("n partitions: %d\n", n_partitions);
 	printf("middle:       %d\n", middle);
 	printf("offset:       %d\n", offset);
 	printf("inset:        %d\n", ft_ps()->info.inset);
 	printf("outset:       %d\n", middle + offset);
+	printf("===============================\n");
 }
 
-void	a2b()
+void	a2b(void)
 {
 	int	top;
-	int	pos;
+	int	px;
 
 	while (ft_ps()->a.stack != NULL)
 	{
 		top = *(int *)ft_ps()->a.stack->obj;
-		pos = is_between(ft_ps()->info.inset, ft_ps()->info.outset, top);
-		printf("{%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, pos, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
-		if (pos >= 0)
+		px = is_between(ft_ps()->info.inset, ft_ps()->info.outset, top);
+		printf("  {%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, px, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
+		if (px >= 0)
 		{
 			push('B');
-			printf("push b\n");
-			ft_ps()->sorted[pos].exists = 0;
-			pos = is_between(ft_ps()->info.inset, ft_ps()->info.middle, top);
-			if (pos >= 0 && pos != ft_ps()->info.middle)
+			ft_ps()->sorted[px].exists = 0;
+			px = is_between(ft_ps()->info.inset, ft_ps()->info.middle - 1, top);
+			if (px >= 0)
 			{
 				rotate('B');
-				printf("rotate b\n");
 				tweak_offset('i');
 			}
 			else
 				tweak_offset('o');
-			if (pos == ft_ps()->info.middle)
-				tweak_offset('i');
 		}
 		else
-		{
 			rotate('A');
-			printf("rotate a\n");
-		}
 		ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
 	}
 }
 
-void	ft_sort()
+void	b2a(void)
+{
+	while (ft_ps()->b.stack != NULL || ft_ps()->a.tail != 0)
+	{
+
+	}
+}
+
+void	ft_sort(void)
 {
 	ft_sort_t_int(ft_ps()->sorted, ft_ps()->n_numbers);
 	init_info();
 	ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
-	printf("---\n");
 	a2b();
 	ft_putstr_fd("Stack A: ", 1);
 	ft_display_doubly(ft_ps()->a.stack);
