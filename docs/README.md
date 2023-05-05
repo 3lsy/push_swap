@@ -123,6 +123,16 @@ Shift down all elements of stack X by 1.
 make
 ```
 
+## Verbose output
+### To see a verbose output use:
+```bash
+export PS_VERBOSE=1
+```
+### To unset this feature, use:
+```bash
+unset PS_VERBOSE
+```
+
 ## Usage
 ```bash
 # Multiple arguments

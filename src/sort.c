@@ -37,14 +37,17 @@ static void	init_info(void)
 		ft_ps()->info.inset--;
 	ft_ps()->info.outset = middle + offset;
 
-	printf("===============================\n");
-	printf("size:         %d\n", ft_ps()->n_numbers);
-	printf("n partitions: %d\n", n_partitions);
-	printf("middle:       %d\n", middle);
-	printf("offset:       %d\n", offset);
-	printf("inset:        %d\n", ft_ps()->info.inset);
-	printf("outset:       %d\n", middle + offset);
-	printf("===============================\n");
+	if (getenv("PS_VERBOSE") != NULL)
+	{
+		printf("===============================\n");
+		printf("size:         %d\n", ft_ps()->n_numbers);
+		printf("n partitions: %d\n", n_partitions);
+		printf("middle:       %d\n", middle);
+		printf("offset:       %d\n", offset);
+		printf("inset:        %d\n", ft_ps()->info.inset);
+		printf("outset:       %d\n", middle + offset);
+		printf("===============================\n");
+	}
 }
 
 void	a2b(void)
@@ -56,7 +59,8 @@ void	a2b(void)
 	{
 		top = *(int *)ft_ps()->a.stack->obj;
 		px = is_between(ft_ps()->info.inset, ft_ps()->info.outset, top);
-		printf("          {%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, px, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
+		if (getenv("PS_VERBOSE") != NULL)
+			printf("          {%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, px, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
 		if (px >= 0)
 		{
 			push('B');
@@ -72,7 +76,8 @@ void	a2b(void)
 		}
 		else
 			rotate('A');
-		ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
+		if (getenv("PS_VERBOSE") != NULL)
+			ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
 	}
 }
 
@@ -88,11 +93,18 @@ void	ft_sort(void)
 {
 	ft_sort_t_int(ft_ps()->sorted, ft_ps()->n_numbers);
 	init_info();
-	ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
+	if (getenv("PS_VERBOSE") != NULL)
+	{
+		ft_display_doubly(ft_ps()->a.stack);
+		ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
+	}
 	a2b();
-	ft_putstr_fd("Stack A: ", 1);
-	ft_display_doubly(ft_ps()->a.stack);
-	ft_putstr_fd("\nStack B: ", 1);
-	ft_display_doubly(ft_ps()->b.stack);
-	ft_display_op(ft_ps()->op_stack);
+	if (getenv("PS_VERBOSE") != NULL)
+	{
+		ft_putstr_fd("Stack A: ", 1);
+		ft_display_doubly(ft_ps()->a.stack);
+		ft_putstr_fd("\nStack B: ", 1);
+		ft_display_doubly(ft_ps()->b.stack);
+		ft_display_op(ft_ps()->op_stack);
+	}
 }

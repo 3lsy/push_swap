@@ -27,7 +27,6 @@ int	main(int ac, char **av)
 	if (!ft_ps()->sorted)
 		return (ft_perror("Error\n", EXIT_FAILURE));
 	ft_fill_stack();
-	ft_display_doubly(ft_ps()->a.stack);//////////////////////
 	ft_sort();
 	return (EXIT_SUCCESS);
 }
