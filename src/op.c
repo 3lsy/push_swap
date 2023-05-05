@@ -52,7 +52,7 @@ void	swap(char s)
 	second->prev->next = second;
 	start->next->prev = start;
 	*stack = second;
-	printf("swap %c\n", s);///////////////////
+	ft_push_op(s, "sa", "sb", "ss");
 }
 
 /*
@@ -75,6 +75,7 @@ void	push(char s)
 	next = (*stack_out)->next;
 	prev = (*stack_out)->prev;
 	ft_push_doubly(*stack_out, stack_in);
+	ft_push_op(s, "pa", "pb", NULL);
 	if (next == *stack_out || prev == *stack_out)
 	{
 		*stack_out = NULL;
@@ -83,7 +84,6 @@ void	push(char s)
 	prev->next = next;
 	next->prev = prev;
 	*stack_out = next;
-	printf("push %c\n", s);////////////
 }
 
 /*
@@ -101,7 +101,7 @@ void	rotate(char s)
 	if (*stack == NULL)
 		return ;
 	*stack = (*stack)->next;
-	printf("rotate %c\n", s);///////////
+	ft_push_op(s, "ra", "rb", "rr");
 }
 
 /*
@@ -119,5 +119,5 @@ void	rrotate(char s)
 	if (*stack == NULL)
 		return ;
 	*stack = (*stack)->prev;
-	printf("rrotate %c\n", s);//////////
+	ft_push_op(s, "rra", "rrb", "rrr");
 }

@@ -42,12 +42,23 @@ void	ft_fill_stack(void)
 ** Do not send mallocated char *operation
 */
 
-void	ft_push_operation(char *operation)
+static void	ft_push_operation(char *operation)
 {
 	t_doubly	*new;
 
+	printf("%s\n", operation);////////////////
 	new = ft_new_doubly(operation, sizeof(char) * (ft_strlen(operation) + 1));
 	if (!new)
 		return ;
 	ft_append_doubly(new, &(ft_ps()->op_stack));
+}
+
+void	ft_push_op(char s, char *op1, char *op2, char *op3)
+{
+	if (s == 'A')
+		ft_push_operation(op1);
+	else if (s == 'B')
+		ft_push_operation(op2);
+	else if (op3 != NULL && s == 'X')
+		ft_push_operation(op3);
 }

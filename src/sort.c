@@ -37,7 +37,6 @@ static void	init_info(void)
 		ft_ps()->info.inset--;
 	ft_ps()->info.outset = middle + offset;
 
-
 	printf("===============================\n");
 	printf("size:         %d\n", ft_ps()->n_numbers);
 	printf("n partitions: %d\n", n_partitions);
@@ -57,7 +56,7 @@ void	a2b(void)
 	{
 		top = *(int *)ft_ps()->a.stack->obj;
 		px = is_between(ft_ps()->info.inset, ft_ps()->info.outset, top);
-		printf("  {%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, px, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
+		printf("          {%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, px, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
 		if (px >= 0)
 		{
 			push('B');
@@ -95,4 +94,5 @@ void	ft_sort(void)
 	ft_display_doubly(ft_ps()->a.stack);
 	ft_putstr_fd("\nStack B: ", 1);
 	ft_display_doubly(ft_ps()->b.stack);
+	ft_display_op(ft_ps()->op_stack);
 }

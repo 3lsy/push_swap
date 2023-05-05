@@ -49,7 +49,7 @@ typedef struct s_ps {
 void		ft_sort(void);
 void		ft_analyzer(void);
 void		ft_fill_stack(void);
-void		ft_push_operation(char *operation);
+void		ft_push_op(char s, char *op1, char *op2, char *op3);
 t_ps		*ft_ps(void);
 void		exit_error(void);
 int			is_between(int first, int last, int nb);
