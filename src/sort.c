@@ -78,9 +78,45 @@ void	a2b(void)
 
 void	b2a(void)
 {
+	t_pair	max;
+	ft_ps()->b.head = ft_ps()->info.offset;
+	ft_ps()->b.tail = 0;
+	ft_ps()->a.tail = 0;
 	while (ft_ps()->b.stack != NULL || ft_ps()->a.tail != 0)
 	{
-
+		max = max_next();
+		if (max.x == 1 && max.y == 0) //First element of B
+		{
+			push('A');
+			ft_ps()->b.head--;
+		}
+		else if (max.x == 3 && max.y == -1) //Last element of A
+		{
+			rrotate('A');
+			ft_ps()->a.tail--;
+		}
+		else if (ft_ps()->a.tail == 0 ||
+				 (ft_ps()->a.tail > 0 && ft_ps()->b.head > 0
+				  && (*(int *)(ft_ps()->b.stack->obj) >
+					  *(int *)(ft_ps()->a.stack->prev->obj))))
+			// OR FIRST ELEMENT OF B > LAST ELEMENT OF A
+		{
+			push('A');
+			rotate('A');
+			ft_ps()->a.tail++;
+		}
+		else if (max.x == 1) //max is in b head
+		{
+			rotate('B');
+			ft_ps()->b.head--;
+		}
+		else if (max.x == 2) // max is in b tail
+		{
+			rrotate('B');
+			ft_ps()->b.tail--;
+		}
+		else
+			exit(1);///////// error
 	}
 }
 
@@ -102,4 +138,5 @@ void	ft_sort(void)
 		ft_display_doubly(ft_ps()->b.stack);
 		ft_display_op(ft_ps()->op_stack);
 	}
+	b2a();
 }

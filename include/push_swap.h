@@ -61,6 +61,14 @@ void		tweak_offset(char io);
 */
 
 void		push(char s);
+void		swap0(char s);
 void		rotate(char s);
+void		rrotate(char s);
+
+/*
+** Search
+*/
+
+t_pair		max_next(void);
 
 #endif
