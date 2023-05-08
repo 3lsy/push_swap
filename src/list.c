@@ -45,14 +45,18 @@ void	ft_fill_stack(void)
 void	ft_push_op(char s, char *op1, char *op2, char *op3)
 {
 	t_doubly	*new;
+	char		*op;
 
 	new = NULL;
+	op = NULL;
 	if (s == 'A')
-		new = ft_new_doubly(op1, sizeof(char) * (ft_strlen(op1) + 1));
+		op = op1;
 	else if (s == 'B')
-		new = ft_new_doubly(op2, sizeof(char) * (ft_strlen(op2) + 1));
+		op = op2;
 	else if (op3 != NULL && s == 'X')
-		new = ft_new_doubly(op3, sizeof(char) * (ft_strlen(op3) + 1));
+		op = op3;
+	printf("%s\n", op);///////////////////
+	new = ft_new_doubly(op, sizeof(char) * (ft_strlen(op) + 1));
 	if (!new)
 		return ;
 	ft_append_doubly(new, &(ft_ps()->op_stack));
