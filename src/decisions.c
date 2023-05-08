@@ -50,18 +50,26 @@ void	tweak_offset(char io)
 	{
 		if (is_empty(ft_ps()->info.inset, ft_ps()->info.middle))
 		{
+			if (getenv("PS_VERBOSE") != NULL)
+				printf("changing INSET: %d - ", ft_ps()->info.inset);
 			ft_ps()->info.inset -= ft_ps()->info.offset;
 			if (ft_ps()->info.inset < 0)
 				ft_ps()->info.inset = 0;
+			if (getenv("PS_VERBOSE") != NULL)
+				printf("%d\n", ft_ps()->info.inset);
 		}
 	}
 	else if (io == 'o')
 	{
 		if (is_empty(ft_ps()->info.middle, ft_ps()->info.outset))
 		{
+			if (getenv("PS_VERBOSE") != NULL)
+				printf("changing OUTSET: %d - ", ft_ps()->info.outset);
 			ft_ps()->info.outset += ft_ps()->info.offset;
 			if (ft_ps()->info.outset >= ft_ps()->n_numbers)
 				ft_ps()->info.outset = ft_ps()->n_numbers - 1;
+			if (getenv("PS_VERBOSE") != NULL)
+				printf("%d\n", ft_ps()->info.outset);
 		}
 	}
 }

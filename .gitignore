@@ -1,5 +1,6 @@
 push_swap
 push_swap_visualizer/
+imgui.ini
 ### C ###
 # Prerequisites
 *.d

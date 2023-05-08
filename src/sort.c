@@ -33,9 +33,7 @@ static void	init_info(void)
 	ft_ps()->info.middle = middle;
 	ft_ps()->info.offset = offset;
 	ft_ps()->info.inset = middle - offset;
-	if (size % 2 == 0 && ft_ps()->info.inset > 0)
-		ft_ps()->info.inset--;
-	ft_ps()->info.outset = middle + offset;
+	ft_ps()->info.outset = middle + offset - 1;
 
 	if (getenv("PS_VERBOSE") != NULL)
 	{
@@ -67,12 +65,9 @@ void	a2b(void)
 			ft_ps()->sorted[px].exists = 0;
 			px = is_between(ft_ps()->info.inset, ft_ps()->info.middle - 1, top);
 			if (px >= 0)
-			{
 				rotate('B');
-				tweak_offset('i');
-			}
-			else
-				tweak_offset('o');
+			tweak_offset('i');
+			tweak_offset('o');
 		}
 		else
 			rotate('A');
