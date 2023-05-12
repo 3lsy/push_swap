@@ -35,17 +35,14 @@ static void	init_info(void)
 	ft_ps()->info.inset = middle - offset;
 	ft_ps()->info.outset = middle + offset - 1;
 
-	if (getenv("PS_VERBOSE") != NULL)
-	{
-		printf("===============================\n");
-		printf("size:         %d\n", ft_ps()->n_numbers);
-		printf("n partitions: %d\n", n_partitions);
-		printf("middle:       %d\n", middle);
-		printf("offset:       %d\n", offset);
-		printf("inset:        %d\n", ft_ps()->info.inset);
-		printf("outset:       %d\n", middle + offset);
-		printf("===============================\n");
-	}
+	printf("===============================\n");
+	printf("size:         %d\n", ft_ps()->n_numbers);
+	printf("n partitions: %d\n", n_partitions);
+	printf("middle:       %d\n", middle);
+	printf("offset:       %d\n", offset);
+	printf("inset:        %d\n", ft_ps()->info.inset);
+	printf("outset:       %d\n", middle + offset);
+	printf("===============================\n");
 }
 
 void	a2b(void)
@@ -78,21 +75,31 @@ void	a2b(void)
 
 void	b2a(void)
 {
+	if (getenv("PS_VERBOSE") != NULL)
+		printf("------------------\n");
 	t_pair	max;
-	ft_ps()->b.head = ft_ps()->info.offset;
-	ft_ps()->b.tail = 0;
-	ft_ps()->a.tail = 0;
 	while (ft_ps()->b.stack != NULL || ft_ps()->a.tail != 0)
 	{
+		if (ft_ps()->b.head <= 0 && ft_ps()->b.tail <= 0 && ft_ps()->a.tail <= 0)
+		{
+			ft_ps()->b.head = ft_ps()->info.offset;
+			ft_ps()->b.tail = 0;
+			ft_ps()->a.tail = 0;
+		}
 		max = max_next();
+		printf("max %d %d\nBHEAD %d\nBTAIL %d\nATAIL %d\n", max.x, max.y, ft_ps()->b.head, ft_ps()->b.tail, ft_ps()->a.tail);
 		if (max.x == 1 && max.y == 0) //First element of B
 		{
 			push('A');
+			ft_display_doubly(ft_ps()->a.stack);
+			ft_display_doubly(ft_ps()->b.stack);
 			ft_ps()->b.head--;
 		}
-		else if (max.x == 3 && max.y == -1) //Last element of A
+		else if (max.x == 3 && max.y == ft_ps()->a.size - 1) //Last element of A
 		{
 			rrotate('A');
+			ft_display_doubly(ft_ps()->a.stack);
+			ft_display_doubly(ft_ps()->b.stack);
 			ft_ps()->a.tail--;
 		}
 		else if (ft_ps()->a.tail == 0 ||
@@ -103,20 +110,30 @@ void	b2a(void)
 		{
 			push('A');
 			rotate('A');
+			ft_display_doubly(ft_ps()->a.stack);
+			ft_display_doubly(ft_ps()->b.stack);
+
 			ft_ps()->a.tail++;
+			ft_ps()->b.head--;
 		}
 		else if (max.x == 1) //max is in b head
 		{
 			rotate('B');
+			ft_display_doubly(ft_ps()->a.stack);
+			ft_display_doubly(ft_ps()->b.stack);
+
 			ft_ps()->b.head--;
+			ft_ps()->b.tail++;
 		}
 		else if (max.x == 2) // max is in b tail
 		{
 			rrotate('B');
+			ft_display_doubly(ft_ps()->a.stack);
+			ft_display_doubly(ft_ps()->b.stack);
+
 			ft_ps()->b.tail--;
+			ft_ps()->b.head++;
 		}
-		else
-			exit(1);///////// error
 	}
 }
 

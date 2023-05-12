@@ -12,10 +12,27 @@
 
 #include "push_swap.h"
 
+/*
+** if op == NULL is a push
+*/
+
 static t_doubly	**choose_stack(char s, void (*op)(char))
 {
 	t_doubly	**stack;
 
+	if (op == NULL)
+	{
+		if (s == 'A')
+		{
+			ft_ps()->a.size++;
+			ft_ps()->b.size--;
+		}
+		else
+		{
+			ft_ps()->a.size--;
+			ft_ps()->b.size++;
+		}
+	}
 	stack = &ft_ps()->a.stack;
 	if (s == 'B')
 		stack = &ft_ps()->b.stack;

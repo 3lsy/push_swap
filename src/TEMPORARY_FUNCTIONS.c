@@ -6,7 +6,7 @@ void	ft_display_doubly(t_doubly *start)
 	t_doubly	*tmp;
 	if (!start)
 	{
-		ft_putstr_fd("Empty list", 2);
+		ft_putstr_fd("  Empty list\n", 2);
 		return ;
 	}
 	tmp = start;
@@ -17,7 +17,7 @@ void	ft_display_doubly(t_doubly *start)
 		printf("%d ", *(int *)(start->obj));
 		start = start->next;
 	}
-	printf("]\n");
+	printf("] size a(%d) b(%d)\n", ft_ps()->a.size, ft_ps()->b.size);
 }
 
 void	ft_display_array(t_int *tab, int size)
@@ -41,7 +41,7 @@ void	ft_display_op(t_doubly *start)
 	t_doubly	*tmp;
 	if (!start)
 	{
-		ft_putstr_fd("Empty list", 2);
+		ft_putstr_fd("Empty list\n", 2);
 		return ;
 	}
 	tmp = start;
