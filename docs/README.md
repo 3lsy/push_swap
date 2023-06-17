@@ -51,7 +51,7 @@ flowchart LR
                     middle[/Middle := Middle of SORTED array/]
                     offset[/Offset := Size of partitions/]
                     inset[/Inset := Limit from Middle - offset/]
-                    outset[/Outset := Limit from Middle + offset/]
+                    outset[/Outset := Limit from Middle + offset - 1/]
                 end
                 Define --> a2b{Stack A is empty}
                 a2b -- No --> topInRange{"A's top number is\ninside [inset, outset]"}
