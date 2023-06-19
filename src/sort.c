@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/09 20:12:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:45:23 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	init_info(void)
 	ft_ps()->info.offset = offset;
 	ft_ps()->info.inset = middle - offset;
 	ft_ps()->info.outset = middle + offset - 1;
-
+/*
 	printf("===============================\n");
 	printf("size:         %d\n", ft_ps()->n_numbers);
 	printf("n partitions: %d\n", n_partitions);
@@ -43,6 +43,7 @@ static void	init_info(void)
 	printf("inset:        %d\n", ft_ps()->info.inset);
 	printf("outset:       %d\n", middle + offset);
 	printf("===============================\n");
+*/
 }
 
 void	a2b(void)
@@ -82,24 +83,24 @@ void	b2a(void)
 	{
 		if (ft_ps()->b.head <= 0 && ft_ps()->b.tail <= 0 && ft_ps()->a.tail <= 0)
 		{
-			ft_ps()->b.head = ft_ps()->info.offset;
+			ft_ps()->b.head = ft_ps()->n_numbers;
 			ft_ps()->b.tail = 0;
 			ft_ps()->a.tail = 0;
 		}
 		max = max_next();
-		printf("max %d %d\nBHEAD %d\nBTAIL %d\nATAIL %d\n", max.x, max.y, ft_ps()->b.head, ft_ps()->b.tail, ft_ps()->a.tail);
+		//printf("max %d %d\nBHEAD %d\nBTAIL %d\nATAIL %d\n", max.x, max.y, ft_ps()->b.head, ft_ps()->b.tail, ft_ps()->a.tail);
 		if (max.x == 1 && max.y == 0) //First element of B
 		{
 			push('A');
-			ft_display_doubly(ft_ps()->a.stack);
-			ft_display_doubly(ft_ps()->b.stack);
+			//ft_display_doubly(ft_ps()->a.stack);
+			//ft_display_doubly(ft_ps()->b.stack);
 			ft_ps()->b.head--;
 		}
 		else if (max.x == 3 && max.y == ft_ps()->a.size - 1) //Last element of A
 		{
 			rrotate('A');
-			ft_display_doubly(ft_ps()->a.stack);
-			ft_display_doubly(ft_ps()->b.stack);
+			//ft_display_doubly(ft_ps()->a.stack);
+			//ft_display_doubly(ft_ps()->b.stack);
 			ft_ps()->a.tail--;
 		}
 		else if (ft_ps()->a.tail == 0 ||
@@ -110,8 +111,8 @@ void	b2a(void)
 		{
 			push('A');
 			rotate('A');
-			ft_display_doubly(ft_ps()->a.stack);
-			ft_display_doubly(ft_ps()->b.stack);
+			//ft_display_doubly(ft_ps()->a.stack);
+			//ft_display_doubly(ft_ps()->b.stack);
 
 			ft_ps()->a.tail++;
 			ft_ps()->b.head--;
@@ -119,8 +120,8 @@ void	b2a(void)
 		else if (max.x == 1) //max is in b head
 		{
 			rotate('B');
-			ft_display_doubly(ft_ps()->a.stack);
-			ft_display_doubly(ft_ps()->b.stack);
+			//ft_display_doubly(ft_ps()->a.stack);
+			//ft_display_doubly(ft_ps()->b.stack);
 
 			ft_ps()->b.head--;
 			ft_ps()->b.tail++;
@@ -128,8 +129,8 @@ void	b2a(void)
 		else if (max.x == 2) // max is in b tail
 		{
 			rrotate('B');
-			ft_display_doubly(ft_ps()->a.stack);
-			ft_display_doubly(ft_ps()->b.stack);
+			//ft_display_doubly(ft_ps()->a.stack);
+			//ft_display_doubly(ft_ps()->b.stack);
 
 			ft_ps()->b.tail--;
 			ft_ps()->b.head++;
