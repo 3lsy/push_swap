@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/05/04 20:07:10 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/20 23:37:33 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,21 @@ void	swap(char s)
 	t_doubly	**stack;
 	t_doubly	*start;
 	t_doubly	*second;
-	t_doubly	*tmp;
 
 	stack = choose_stack(s, swap);
 	if (*stack == NULL || *stack == (*stack)->next)
 		return ;
 	start = *stack;
 	second = start->next;
-	tmp = start->next;
-	start->next = second->next;
-	second->next = tmp;
-	tmp = start->prev;
-	start->prev = second->prev;
-	second->prev = tmp;
-	second->prev->next = second;
-	start->next->prev = start;
+	if (*stack != (*stack)->next->next)
+	{
+		start->next = second->next;
+		second->next = start;
+		second->prev = start->prev;
+		start->prev = second;
+		second->prev->next = second;
+		start->next->prev = start;
+	}
 	*stack = second;
 	ft_push_op(s, "sa", "sb", "ss");
 }
@@ -115,7 +115,7 @@ void	rotate(char s)
 	t_doubly	**stack;
 
 	stack = choose_stack(s, rotate);
-	if (*stack == NULL)
+	if (*stack == NULL || *stack == (*stack)->next)
 		return ;
 	*stack = (*stack)->next;
 	ft_push_op(s, "ra", "rb", "rr");
@@ -133,7 +133,7 @@ void	rrotate(char s)
 	t_doubly	**stack;
 
 	stack = choose_stack(s, rrotate);
-	if (*stack == NULL)
+	if (*stack == NULL || *stack == (*stack)->prev)
 		return ;
 	*stack = (*stack)->prev;
 	ft_push_op(s, "rra", "rrb", "rrr");

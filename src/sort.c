@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/19 16:45:23 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:20:29 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,11 @@ void	ft_sort(void)
 {
 	ft_sort_t_int(ft_ps()->sorted, ft_ps()->n_numbers);
 	init_info();
+	if (ft_ps()->n_numbers == 3)
+	{
+		sort_three();
+		return ;
+	}
 	if (getenv("PS_VERBOSE") != NULL)
 	{
 		ft_display_doubly(ft_ps()->a.stack);

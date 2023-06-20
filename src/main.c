@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/09 20:12:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/20 23:32:41 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ int	main(int ac, char **av)
 	if (!ft_ps()->sorted)
 		return (ft_perror("Error\n", EXIT_FAILURE));
 	ft_fill_stack();
-	ft_sort();
+	ft_display_doubly(ft_ps()->a.stack);
+	if (ft_ps()->n_numbers <= 5 && ft_ps()->n_numbers > 1)
+		sort_five(1, 1);
+	else if (ft_ps()->n_numbers > 5)
+		ft_sort();
+	ft_display_doubly(ft_ps()->a.stack);
+	ft_display_doubly(ft_ps()->b.stack);
+
 	return (EXIT_SUCCESS);
 }
 

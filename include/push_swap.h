@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/17 19:58:18 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:45:36 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ typedef struct s_ps {
 	t_bool		va_allocated;
 }	t_ps;
 
+t_pair		find_limit(t_bool search_max, t_bool search_min);
+void		op_repeat(int i, void (*op)(char), char s);
+void		sort_three(void);
+void		sort_five(int limit_max, int limit_min);
 void		ft_sort(void);
 void		ft_analyzer(void);
 void		ft_fill_stack(void);
@@ -61,7 +65,7 @@ void		tweak_offset(char io);
 */
 
 void		push(char s);
-void		swap0(char s);
+void		swap(char s);
 void		rotate(char s);
 void		rrotate(char s);
 
