@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/21 18:57:02 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:11:14 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		exit_error(void);
 int			is_between(int first, int last, int nb);
 t_bool		is_empty(int first, int last);
 void		tweak_offset(char io);
-
+void		ret2a(void);
 /*
 ** operations
 */

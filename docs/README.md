@@ -168,3 +168,8 @@ pa
 ./push_swap one two 3
 Error
 ```
+
+############ Recomended tester
+*https://github.com/zaperfish/push_swap_tester.git*
+############ Recomended visualizer
+*https://github.com/o-reo/push_swap_visualizer.git*

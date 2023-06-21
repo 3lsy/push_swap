@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/21 18:56:20 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:49:16 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ void	reset_tail_head(void)
 	ft_ps()->a.tail = 0;
 }
 
-void	b2a(void)
+void	b2a(t_pair max)
 {
-	t_pair	max;
-
 	while (ft_ps()->b.stack != NULL || ft_ps()->a.tail != 0)
 	{
 		if (ft_ps()->b.head <= 0 && ft_ps()->b.tail <= 0
@@ -81,8 +79,7 @@ void	b2a(void)
 			b2a_move(&push, 'A', NULL, &ft_ps()->b.head);
 		else if (max.x == 3 && max.y == ft_ps()->a.size - 1)
 			b2a_move(&rrotate, 'A', NULL, &ft_ps()->a.tail);
-		else if (ft_ps()->a.tail == 0
-			|| (ft_ps()->a.tail > 0 && ft_ps()->b.head > 0
+		else if (ft_ps()->a.tail == 0 || (ft_ps()->a.tail > 0
 				&& (*(int *)(ft_ps()->b.stack->obj)
 				> *(int *)(ft_ps()->a.stack->prev->obj))))
 		{
@@ -93,6 +90,8 @@ void	b2a(void)
 			b2a_move(&rotate, 'B', &ft_ps()->b.tail, &ft_ps()->b.head);
 		else if (max.x == 2)
 			b2a_move(&rrotate, 'B', &ft_ps()->b.head, &ft_ps()->b.tail);
+		else
+			break ;
 	}
 }
 
@@ -101,5 +100,5 @@ void	ft_sort(void)
 	ft_sort_t_int(ft_ps()->sorted, ft_ps()->n_numbers);
 	init_info();
 	a2b();
-	b2a();
+	b2a((t_pair){0, 0});
 }
