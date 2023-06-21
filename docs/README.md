@@ -169,7 +169,7 @@ pa
 Error
 ```
 
-############ Recomended tester
+###### Recomended tester
 *https://github.com/zaperfish/push_swap_tester.git*
-############ Recomended visualizer
+###### Recomended visualizer
 *https://github.com/o-reo/push_swap_visualizer.git*
