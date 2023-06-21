@@ -6,14 +6,13 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/20 22:45:36 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:57:02 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "TEMPORARY_INCLUDE.h"//////////
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
@@ -46,10 +45,11 @@ typedef struct s_ps {
 	t_bool		va_allocated;
 }	t_ps;
 
-t_pair		find_limit(t_bool search_max, t_bool search_min);
+void		b2a_move(void (*op)(char), char s, int *one, int *two);
+t_pair		find_limit(t_bool search_max, t_bool search_min, int n_numbers);
 void		op_repeat(int i, void (*op)(char), char s);
 void		sort_three(void);
-void		sort_five(int limit_max, int limit_min);
+void		sort_five(int limit_max, int limit_min, int n_numbers);
 void		ft_sort(void);
 void		ft_analyzer(void);
 void		ft_fill_stack(void);

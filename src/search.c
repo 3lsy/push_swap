@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/19 16:45:10 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:07:05 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 t_pair	max_head(t_doubly *tmp, t_doubly *start)
 {
-	t_pair 		pair;
+	t_pair		pair;
 	int			i;
 	int			max;
 
@@ -31,7 +31,6 @@ t_pair	max_head(t_doubly *tmp, t_doubly *start)
 	i = 0;
 	pair.y = i;
 	max = *(int *)(tmp->obj);
-	//printf("FIRST MAX HEAD VALUE: %d\n", max);
 	i++;
 	tmp = tmp->next;
 	while (tmp != start && i < ft_ps()->b.head)
@@ -59,19 +58,16 @@ t_pair	max_head(t_doubly *tmp, t_doubly *start)
 t_pair	max_tail(t_doubly *tmp, int tail, int last_index)
 {
 	t_doubly	*end;
-	t_pair 		pair;
-	int			i;
+	t_pair		pair;
 	int			max;
 
 	if (tmp == NULL || tail == 0)
 		return ((t_pair){-1, -1});
 	tmp = tmp->prev;
 	end = tmp;
-	i = last_index;
-	pair.y = i;
+	pair.y = last_index;
 	max = *(int *)(tmp->obj);
-	//printf("FIRST MAX TAIL VALUE: %d\n", max);
-	i--;
+	last_index--;
 	tail--;
 	tmp = tmp->prev;
 	while (tmp != end && tail > 0)
@@ -79,14 +75,13 @@ t_pair	max_tail(t_doubly *tmp, int tail, int last_index)
 		if (max < *(int *)(tmp->obj))
 		{
 			max = *(int *)(tmp->obj);
-			pair.y = i;
+			pair.y = last_index;
 		}
-		i--;
+		last_index--;
 		tail--;
 		tmp = tmp->prev;
 	}
-	pair.x = max;
-	return (pair);
+	return ((t_pair){max, pair.y});
 }
 
 /*
@@ -109,7 +104,6 @@ t_pair	max_next(void)
 	bhead = max_head(ft_ps()->b.stack, ft_ps()->b.stack);
 	btail = max_tail(ft_ps()->b.stack, ft_ps()->b.tail, ft_ps()->b.size - 1);
 	atail = max_tail(ft_ps()->a.stack, ft_ps()->a.tail, ft_ps()->a.size - 1);
-	//printf("Indexes: bhead (%d) btail (%d) atail (%d)\n", bhead.y, btail.y, atail.y);
 	if (bhead.y != -1
 		&& (btail.y == -1 || bhead.x > btail.x)
 		&& (atail.y == -1 || bhead.x > atail.x))

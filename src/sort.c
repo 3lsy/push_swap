@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/20 19:20:29 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:56:20 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ static void	init_info(void)
 	ft_ps()->info.offset = offset;
 	ft_ps()->info.inset = middle - offset;
 	ft_ps()->info.outset = middle + offset - 1;
-/*
-	printf("===============================\n");
-	printf("size:         %d\n", ft_ps()->n_numbers);
-	printf("n partitions: %d\n", n_partitions);
-	printf("middle:       %d\n", middle);
-	printf("offset:       %d\n", offset);
-	printf("inset:        %d\n", ft_ps()->info.inset);
-	printf("outset:       %d\n", middle + offset);
-	printf("===============================\n");
-*/
 }
 
 void	a2b(void)
@@ -55,8 +45,6 @@ void	a2b(void)
 	{
 		top = *(int *)ft_ps()->a.stack->obj;
 		px = is_between(ft_ps()->info.inset, ft_ps()->info.outset, top);
-		if (getenv("PS_VERBOSE") != NULL)
-			printf("          {%d , %d : inset (%d) outset (%d) offset(%d)}\n", top, px, ft_ps()->info.inset, ft_ps()->info.outset, ft_ps()->info.offset);
 		if (px >= 0)
 		{
 			push('B');
@@ -69,72 +57,42 @@ void	a2b(void)
 		}
 		else
 			rotate('A');
-		if (getenv("PS_VERBOSE") != NULL)
-			ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
 	}
+}
+
+void	reset_tail_head(void)
+{
+	ft_ps()->b.head = ft_ps()->n_numbers;
+	ft_ps()->b.tail = 0;
+	ft_ps()->a.tail = 0;
 }
 
 void	b2a(void)
 {
-	if (getenv("PS_VERBOSE") != NULL)
-		printf("------------------\n");
 	t_pair	max;
+
 	while (ft_ps()->b.stack != NULL || ft_ps()->a.tail != 0)
 	{
-		if (ft_ps()->b.head <= 0 && ft_ps()->b.tail <= 0 && ft_ps()->a.tail <= 0)
-		{
-			ft_ps()->b.head = ft_ps()->n_numbers;
-			ft_ps()->b.tail = 0;
-			ft_ps()->a.tail = 0;
-		}
+		if (ft_ps()->b.head <= 0 && ft_ps()->b.tail <= 0
+			&& ft_ps()->a.tail <= 0)
+			reset_tail_head();
 		max = max_next();
-		//printf("max %d %d\nBHEAD %d\nBTAIL %d\nATAIL %d\n", max.x, max.y, ft_ps()->b.head, ft_ps()->b.tail, ft_ps()->a.tail);
-		if (max.x == 1 && max.y == 0) //First element of B
+		if (max.x == 1 && max.y == 0)
+			b2a_move(&push, 'A', NULL, &ft_ps()->b.head);
+		else if (max.x == 3 && max.y == ft_ps()->a.size - 1)
+			b2a_move(&rrotate, 'A', NULL, &ft_ps()->a.tail);
+		else if (ft_ps()->a.tail == 0
+			|| (ft_ps()->a.tail > 0 && ft_ps()->b.head > 0
+				&& (*(int *)(ft_ps()->b.stack->obj)
+				> *(int *)(ft_ps()->a.stack->prev->obj))))
 		{
 			push('A');
-			//ft_display_doubly(ft_ps()->a.stack);
-			//ft_display_doubly(ft_ps()->b.stack);
-			ft_ps()->b.head--;
+			b2a_move(&rotate, 'A', &ft_ps()->a.tail, &ft_ps()->b.head);
 		}
-		else if (max.x == 3 && max.y == ft_ps()->a.size - 1) //Last element of A
-		{
-			rrotate('A');
-			//ft_display_doubly(ft_ps()->a.stack);
-			//ft_display_doubly(ft_ps()->b.stack);
-			ft_ps()->a.tail--;
-		}
-		else if (ft_ps()->a.tail == 0 ||
-				 (ft_ps()->a.tail > 0 && ft_ps()->b.head > 0
-				  && (*(int *)(ft_ps()->b.stack->obj) >
-					  *(int *)(ft_ps()->a.stack->prev->obj))))
-			// OR FIRST ELEMENT OF B > LAST ELEMENT OF A
-		{
-			push('A');
-			rotate('A');
-			//ft_display_doubly(ft_ps()->a.stack);
-			//ft_display_doubly(ft_ps()->b.stack);
-
-			ft_ps()->a.tail++;
-			ft_ps()->b.head--;
-		}
-		else if (max.x == 1) //max is in b head
-		{
-			rotate('B');
-			//ft_display_doubly(ft_ps()->a.stack);
-			//ft_display_doubly(ft_ps()->b.stack);
-
-			ft_ps()->b.head--;
-			ft_ps()->b.tail++;
-		}
-		else if (max.x == 2) // max is in b tail
-		{
-			rrotate('B');
-			//ft_display_doubly(ft_ps()->a.stack);
-			//ft_display_doubly(ft_ps()->b.stack);
-
-			ft_ps()->b.tail--;
-			ft_ps()->b.head++;
-		}
+		else if (max.x == 1)
+			b2a_move(&rotate, 'B', &ft_ps()->b.tail, &ft_ps()->b.head);
+		else if (max.x == 2)
+			b2a_move(&rrotate, 'B', &ft_ps()->b.head, &ft_ps()->b.tail);
 	}
 }
 
@@ -142,24 +100,6 @@ void	ft_sort(void)
 {
 	ft_sort_t_int(ft_ps()->sorted, ft_ps()->n_numbers);
 	init_info();
-	if (ft_ps()->n_numbers == 3)
-	{
-		sort_three();
-		return ;
-	}
-	if (getenv("PS_VERBOSE") != NULL)
-	{
-		ft_display_doubly(ft_ps()->a.stack);
-		ft_display_array(ft_ps()->sorted, ft_ps()->n_numbers);
-	}
 	a2b();
-	if (getenv("PS_VERBOSE") != NULL)
-	{
-		ft_putstr_fd("Stack A: ", 1);
-		ft_display_doubly(ft_ps()->a.stack);
-		ft_putstr_fd("\nStack B: ", 1);
-		ft_display_doubly(ft_ps()->b.stack);
-		ft_display_op(ft_ps()->op_stack);
-	}
 	b2a();
 }

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:08:42 by echavez-          #+#    #+#             */
-/*   Updated: 2023/05/08 17:40:42 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:56:29 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_fill_stack(void)
 		ft_ps()->sorted[i].exists = 1;
 		new = ft_new_doubly((void *)&tmp, sizeof(int));
 		if (!new)
- 			exit_error();
+			exit_error();
 		ft_append_doubly(new, &(ft_ps()->a.stack));
 		i++;
 	}
@@ -55,9 +55,18 @@ void	ft_push_op(char s, char *op1, char *op2, char *op3)
 		op = op2;
 	else if (op3 != NULL && s == 'X')
 		op = op3;
-	printf("%s\n", op);///////////////////
+	ft_putendl_fd(op, 1);
 	new = ft_new_doubly(op, sizeof(char) * (ft_strlen(op) + 1));
 	if (!new)
 		return ;
 	ft_append_doubly(new, &(ft_ps()->op_stack));
+}
+
+void	b2a_move(void (*op)(char), char s, int *one, int *two)
+{
+	op(s);
+	if (one != NULL)
+		(*one)++;
+	if (two != NULL)
+		(*two)--;
 }

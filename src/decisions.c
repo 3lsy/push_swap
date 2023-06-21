@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/09 20:12:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:37:34 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,18 @@ void	tweak_offset(char io)
 	{
 		if (is_empty(ft_ps()->info.inset, ft_ps()->info.middle))
 		{
-			if (getenv("PS_VERBOSE") != NULL)
-				printf("changing INSET: %d - ", ft_ps()->info.inset);
 			ft_ps()->info.inset -= ft_ps()->info.offset;
 			if (ft_ps()->info.inset < 0)
 				ft_ps()->info.inset = 0;
-			if (getenv("PS_VERBOSE") != NULL)
-				printf("%d\n", ft_ps()->info.inset);
 		}
 	}
 	else if (io == 'o')
 	{
 		if (is_empty(ft_ps()->info.middle, ft_ps()->info.outset))
 		{
-			if (getenv("PS_VERBOSE") != NULL)
-				printf("changing OUTSET: %d - ", ft_ps()->info.outset);
 			ft_ps()->info.outset += ft_ps()->info.offset;
 			if (ft_ps()->info.outset >= ft_ps()->n_numbers)
 				ft_ps()->info.outset = ft_ps()->n_numbers - 1;
-			if (getenv("PS_VERBOSE") != NULL)
-				printf("%d\n", ft_ps()->info.outset);
 		}
 	}
 }

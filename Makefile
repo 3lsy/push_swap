@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2023/06/20 22:46:52 by echavez-         ###   ########.fr        #
+#    Updated: 2023/06/21 18:57:53 by echavez-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,7 +31,7 @@ DIRFOO      :=  #$(DIRSRC)/foo/
 
 DIRS        :=  $(DIRSRC) $(DIRFOO)
 
-SRC         =   main.c analyzer.c list.c sort.c decisions.c op.c search.c mini_sort.c limits.c TEMPORARY_FUNCTIONS.c
+SRC         =   main.c analyzer.c list.c sort.c decisions.c op.c search.c mini_sort.c limits.c
 FOO         =
 
 SRCS        :=  $(SRC) $(FOO)

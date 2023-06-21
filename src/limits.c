@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 22:45:57 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/21 13:12:51 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:10:38 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ static int	find_min(void)
 
 // pair.x weight
 // pair.y max or min {1, -1}
-t_pair	find_limit(t_bool search_max, t_bool search_min)
+t_pair	find_limit(t_bool search_max, t_bool search_min, int n_numbers)
 {
 	static int	weight[5] = {0, 1, 2, -2, -1};
 	int			max;
 	int			min;
 
-	if (ft_ps()->n_numbers == 4)
+	if (n_numbers == 4)
 		weight[3] = -1;
 	if (search_max)
 		max = find_max();

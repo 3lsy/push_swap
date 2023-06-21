@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:20:13 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/21 13:07:26 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:12:15 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sort_three(void)
 {
 	int	top;
 	int	middle;
-	int last;
+	int	last;
 
 	top = *(int *)ft_ps()->a.stack->obj;
 	middle = *(int *)ft_ps()->a.stack->next->obj;
@@ -46,18 +46,18 @@ void	sort_three(void)
 	sort_three();
 }
 
-void	sort_five(int limit_max, int limit_min)
+void	sort_five(int limit_max, int limit_min, int n_numbers)
 {
 	t_pair	limit;
 
-	if (ft_ps()->n_numbers == 2 &&
-		*(int *)ft_ps()->a.stack->obj > *(int *)ft_ps()->a.stack->next->obj)
-			swap('A');
+	if (ft_ps()->n_numbers == 2
+		&& *(int *)ft_ps()->a.stack->obj > *(int *)ft_ps()->a.stack->next->obj)
+		swap('A');
 	if (ft_ps()->n_numbers == 3)
 		sort_three();
 	if (ft_ps()->n_numbers >= 4)
 	{
-		limit = find_limit(limit_max, limit_min);
+		limit = find_limit(limit_max, limit_min, n_numbers);
 		if (limit.x < 0)
 			op_repeat(limit.x, rrotate, 'A');
 		if (limit.x > 0)
@@ -68,11 +68,10 @@ void	sort_five(int limit_max, int limit_min)
 	}
 	if (limit_max && limit_min && ft_ps()->n_numbers == 5)
 	{
-		ft_ps()->n_numbers = 4;
 		if (limit.y > 0)
-			sort_five(0, 1);
+			sort_five(0, 1, 4);
 		else
-			sort_five(1, 0);
+			sort_five(1, 0, 4);
 	}
 }
 
