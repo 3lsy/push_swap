@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 22:45:57 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/20 23:06:29 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:12:51 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_pair	find_limit(t_bool search_max, t_bool search_min)
 		return ((t_pair){weight[min], -1});
 	else if (search_max && search_min)
 	{
-		if (ft_abs(weight[max]) > ft_abs(weight[min]))
+		if (ft_abs(weight[max]) < ft_abs(weight[min]))
 			return ((t_pair){weight[max], 1});
 		return ((t_pair){weight[min], -1});
 	}

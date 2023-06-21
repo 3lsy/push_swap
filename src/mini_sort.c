@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:20:13 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/20 23:43:20 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:07:26 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,14 @@ void	sort_five(int limit_max, int limit_min)
 		if (!limit_max || !limit_min || ft_ps()->n_numbers == 4)
 			sort_three();
 	}
-	if (limit_max && limit_min && ft_ps()->n_numbers == 5 && limit.y > 0)
-		sort_five(0, 1);
-	else if (limit_max && limit_min && ft_ps()->n_numbers == 5)
-		sort_five(1, 0);
+	if (limit_max && limit_min && ft_ps()->n_numbers == 5)
+	{
+		ft_ps()->n_numbers = 4;
+		if (limit.y > 0)
+			sort_five(0, 1);
+		else
+			sort_five(1, 0);
+	}
 }
 
 void	op_repeat(int i, void (*op)(char), char s)
