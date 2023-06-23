@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/23 12:18:39 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:27:21 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	is_sorted(void)
 	next_tmp = ft_ps()->a.stack->next;
 	while (next_tmp != ft_ps()->a.stack)
 	{
-		if (tmp > next_tmp)
+		if (*(int *)tmp->obj > *(int *)next_tmp->obj)
 			return (0);
 		tmp = tmp->next;
 		next_tmp = next_tmp->next;
