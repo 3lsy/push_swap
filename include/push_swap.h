@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/21 21:11:14 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:19:04 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_ps {
 	t_bool		va_allocated;
 }	t_ps;
 
+int			is_sorted(void);
 void		b2a_move(void (*op)(char), char s, int *one, int *two);
 t_pair		find_limit(t_bool search_max, t_bool search_min, int n_numbers);
 void		op_repeat(int i, void (*op)(char), char s);
