@@ -6,11 +6,13 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/25 11:47:33 by echavez-          #+#    #+#              #
-#    Updated: 2023/06/21 18:57:53 by echavez-         ###   ########.fr        #
+#    Updated: 2023/06/24 13:39:17 by echavez-         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME        =   push_swap
+
+BONUS		=	checker
 
 #****************** INC *******************#
 # General
@@ -32,9 +34,9 @@ DIRFOO      :=  #$(DIRSRC)/foo/
 DIRS        :=  $(DIRSRC) $(DIRFOO)
 
 SRC         =   main.c analyzer.c list.c sort.c decisions.c op.c search.c mini_sort.c limits.c
-FOO         =
+FOO         =   checker.c checker_exec.c analyzer.c list.c sort.c decisions.c op.c search.c mini_sort.c limits.c
 
-SRCS        :=  $(SRC) $(FOO)
+SRCS        :=  $(SRC)
 
 #***************** DEPS ******************#
 
@@ -45,6 +47,10 @@ DIROBJ      =   ./depo/
 OAUX        =   $(SRCS:%=$(DIROBJ)%)
 DEPS        =   $(OAUX:.c=.d)
 OBJS        =   $(OAUX:.c=.o)
+
+BOAUX       =   $(FOO:%=$(DIROBJ)%)
+BDEPS       =   $(BOAUX:.c=.d)
+BOBJS       =   $(BOAUX:.c=.o)
 
 .ONESHELL:
 
@@ -125,8 +131,13 @@ $(NAME)         :   ftlib $(OBJS)
 
 	                @$(ECHO) $(BOLD)$(GREEN)'> '$(NAME)' Compiled'$(E0M)
 
+bonus			:	ftlib $(BOBJS)
+					@$(CC) $(INCLUDE) $(CFLAGS) -o $(BONUS) $(BOBJS) $(LIB_INC)
+	                @$(ECHO) $(BOLD)$(GREEN)'> '$(BONUS)' Compiled'$(E0M)
+
 clean           :
 	                @($(RM) $(OBJS))
+					@($(RM) $(BOBJS))
 	                @($(RM) $(DEPS))
 	                @($(RM) $(DIROBJ))
 	                @(cd $(LIB) && $(MAKE) clean)
@@ -136,10 +147,14 @@ all             :  $(NAME)
 
 fclean          :  clean
 	                @$(RM) $(NAME)
+					@$(RM) $(BONUS)
 	                @(cd $(LIB) && $(MAKE) fclean)
 	                @$(ECHO) $(BOLD)$(RED)'> Executable             removed'$(E0M)
 
-re              :  fclean all
+re              :  fclean mkdepo all
+
+mkdepo			:
+					mkdir -p $(DIROBJ)
 
 ftlib           :
 	                @(cd $(LIB) && $(MAKE))

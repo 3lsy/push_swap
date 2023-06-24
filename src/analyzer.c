@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 18:31:59 by echavez-          #+#    #+#             */
-/*   Updated: 2023/03/08 23:28:46 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:54:39 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ void	ft_analyzer(void)
 	i = 0;
 	while (vargs[i])
 	{
+		if (ft_strlen(vargs[i]) == 0)
+			exit_error();
 		ft_lexer_parser(vargs[i]);
 		ft_semantic(vargs, vargs[i], i);
 		i++;
 	}
+	if (i == 0)
+		exit_error();
 	ft_ps()->n_numbers = i;
 	ft_ps()->a.size = i;
 }

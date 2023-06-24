@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 19:08:42 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/21 18:56:29 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:59:34 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	ft_push_op(char s, char *op1, char *op2, char *op3)
 		op = op2;
 	else if (op3 != NULL && s == 'X')
 		op = op3;
-	ft_putendl_fd(op, 1);
+	if (ft_ps()->checker != 1)
+		ft_putendl(op);
 	new = ft_new_doubly(op, sizeof(char) * (ft_strlen(op) + 1));
 	if (!new)
 		return ;

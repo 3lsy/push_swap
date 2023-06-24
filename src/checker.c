@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 12:23:10 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/24 13:58:08 by echavez-         ###   ########.fr       */
+/*   Created: 2023/06/24 12:23:02 by echavez-          #+#    #+#             */
+/*   Updated: 2023/06/24 13:59:03 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "bonus.h"
 
 int	main(int ac, char **av)
 {
@@ -27,12 +27,11 @@ int	main(int ac, char **av)
 	if (!ft_ps()->sorted)
 		return (ft_perror("Error\n", EXIT_FAILURE));
 	ft_fill_stack();
+	read_op();
 	if (is_sorted())
-		return (EXIT_SUCCESS);
-	if (ft_ps()->n_numbers <= 5 && ft_ps()->n_numbers > 1)
-		sort_five(1, 1, ft_ps()->n_numbers);
-	else if (ft_ps()->n_numbers > 5)
-		ft_sort();
+		ft_putendl_fd("OK", 1);
+	else
+		ft_putendl_fd("KO", 1);
 	return (EXIT_SUCCESS);
 }
 
@@ -50,7 +49,7 @@ t_ps	*ft_ps(void)
 
 static __attribute__((constructor)) void	ps_constructor(void)
 {
-	ft_ps()->checker = 0;
+	ft_ps()->checker = 1;
 	ft_ps()->a.head = 0;
 	ft_ps()->a.tail = 0;
 	ft_ps()->a.size = 0;

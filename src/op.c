@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:29:48 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/20 23:37:33 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:05:47 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	push(char s)
 	stack_out = &ft_ps()->a.stack;
 	if (s == 'A')
 		stack_out = &ft_ps()->b.stack;
+	if (*stack_out == NULL)
+		return ;
 	next = (*stack_out)->next;
 	prev = (*stack_out)->prev;
 	ft_push_doubly(*stack_out, stack_in);

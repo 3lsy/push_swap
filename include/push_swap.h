@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 12:06:28 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/23 12:19:04 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:57:56 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_info {
 }	t_info;
 
 typedef struct s_ps {
+	t_bool		checker;
 	t_int		*sorted;
 	int			n_numbers;
 	t_info		info;
