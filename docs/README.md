@@ -6,6 +6,13 @@ The stacks contains a random amount of negative and positive numbers without any
 
 The program displays the smallest list of instructions to sort the stack X, having the smallest number at the top.
 
+### A➥B
+![image](https://github.com/3lsy/push_swap/assets/35022933/6d862a22-1db2-40f1-8a49-5f33ee1b8ea6)
+### B➦A
+![image](https://github.com/3lsy/push_swap/assets/35022933/3bddacac-56f9-4998-8d2d-10222a381efe)
+
+
+
 ## Flow Chart
 ### Main flow
 ```mermaid
