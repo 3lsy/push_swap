@@ -7,7 +7,7 @@ The stacks contains a random amount of negative and positive numbers without any
 The program displays the smallest list of instructions to sort the stack X, having the smallest number at the top.
 
 ## Number of steps
-$${\huge \color{orange}500 \space \color{lightblue} numbers \space ≃ \space \color{lightgreen} 4800 \space \color{lightblue} steps}$$
+$${\huge \color{orange}500 \space \color{lightblue} numbers \space ≃ \space \color{lightgreen} 4825 \space \color{lightblue} steps}$$
 ```
 ===Test===
 Stacksize: 500 Cases: 100
