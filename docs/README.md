@@ -11,7 +11,7 @@ $${\huge \color{orange}500 \space \color{lightblue} numbers \space ≃ \space \c
 ```
 ===Test===
 Stacksize: 500 Cases: 100
-Progress : [########################################] 100% 
+Progress : [########################################] 100%
 Status : OK Average: 4825
 ```
 $${\huge \color{orange}100 \space \color{lightblue} numbers \space ≃ \space \color{lightgreen} 585 \space \color{lightblue} steps}$$
@@ -19,16 +19,12 @@ $${\huge \color{orange}100 \space \color{lightblue} numbers \space ≃ \space \c
 ```
 ===Test===
 Stacksize: 100 Cases: 100
-Progress : [########################################] 100% 
+Progress : [########################################] 100%
 Status : OK Average: 585
 ```
 
-### A
-![image](https://github.com/3lsy/push_swap/assets/35022933/ab9e2365-8070-4a3a-872e-3e9e5162f646)
-### A➥B
-![image](https://github.com/3lsy/push_swap/assets/35022933/6d862a22-1db2-40f1-8a49-5f33ee1b8ea6)
-### B➦A
-![image](https://github.com/3lsy/push_swap/assets/35022933/3bddacac-56f9-4998-8d2d-10222a381efe)
+### A ⇌ B
+![push_swap.gif](push_swap.gif)
 
 ## Flow Chart
 ### Main flow
