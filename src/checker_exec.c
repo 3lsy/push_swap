@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 13:37:45 by echavez-          #+#    #+#             */
-/*   Updated: 2023/06/24 14:14:15 by echavez-         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:33:12 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	read_op(void)
 		if (!exec_push_swap(line) && !exec_rot(line))
 		{
 			ft_putendl_fd("Error", 2);
+			ft_get_next_line(-503);
 			free(line);
 			exit(EXIT_FAILURE);
 		}
