@@ -4,6 +4,9 @@ Welcome to Push_Swap, an advanced and efficient algorithm designed to tackle the
 
 The program displays the smallest list of instructions to sort the stack X, having the smallest number at the top.
 
+### A ⇌ B
+![push_swap.gif](push_swap.gif)
+
 ## Number of steps
 $${\huge \color{orange}500 \space \color{lightblue} numbers \space ≃ \space \color{lightgreen} 4825 \space \color{lightblue} steps}$$
 ```
@@ -20,9 +23,6 @@ Stacksize: 100 Cases: 100
 Progress : [########################################] 100%
 Status : OK Average: 585
 ```
-
-### A ⇌ B
-![push_swap.gif](push_swap.gif)
 
 ### Optimized for Constraints
 Specifically designed to handle the unique constraints of the push_swap problem, where traditional `O(nlogn)` algorithms fall short.
