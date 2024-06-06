@@ -27,7 +27,7 @@ Status : OK Average: 585
 ### Optimized for Constraints
 Specifically designed to handle the unique constraints of the push_swap problem, where traditional `O(nlogn)` algorithms fall short.
 
-Our empirical data highlights the algorithm's impressive performance across various input sizes:
+The empirical data highlights the algorithm's impressive performance across various input sizes:
 ![push_swap_analysis](https://github.com/3lsy/push_swap/assets/107457733/8ea68240-59c1-47db-9efe-842026d6e406)
 
 
