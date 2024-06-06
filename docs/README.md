@@ -1,6 +1,6 @@
 # push_swap
 
-This project is the first encounter with the concept of complexity. A sorting algorithm in the C language using stacks and with limited operations to interact with the stacks to sort the numbers.
+This project is an encounter with the concept of complexity. A sorting algorithm in the C language using stacks and with limited operations to interact with the stacks to sort the numbers.
 
 The stacks contains a random amount of negative and positive numbers without any duplicates.
 
