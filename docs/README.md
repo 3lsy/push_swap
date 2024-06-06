@@ -1,8 +1,6 @@
-# push_swap
+# Push_Swap: An Optimized Stack-Based Sorting Algorithm
 
-This project is an encounter with the concept of complexity. A sorting algorithm in the C language using stacks and with limited operations to interact with the stacks to sort the numbers.
-
-The stacks contains a random amount of negative and positive numbers without any duplicates.
+Welcome to Push_Swap, an advanced and efficient algorithm designed to tackle the unique challenges of sorting a stack of integers without duplicates using a constrained set of operations. This project demonstrates the power of algorithmic optimization within the strict limits of stack-based manipulations.
 
 The program displays the smallest list of instructions to sort the stack X, having the smallest number at the top.
 
@@ -25,6 +23,13 @@ Status : OK Average: 585
 
 ### A ⇌ B
 ![push_swap.gif](push_swap.gif)
+
+### Optimized for Constraints
+Specifically designed to handle the unique constraints of the push_swap problem, where traditional O(nlog⁡n)O(nlogn) algorithms fall short.
+
+Our empirical data highlights the algorithm's impressive performance across various input sizes:
+![push_swap_analysis](https://github.com/3lsy/push_swap/assets/107457733/8ea68240-59c1-47db-9efe-842026d6e406)
+
 
 ## Flow Chart
 ### Main flow
